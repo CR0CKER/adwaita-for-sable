@@ -18,6 +18,23 @@ rules target Sable's class names, which can change between releases.
 
 To undo: pick *Sable (default)* in both rows, and remove the two themes.
 
+**Updating**: an import adds a new tile; it never replaces the old one. Remove the two Adwaita tiles,
+import the new files, restart Sable, then select them again. Selecting right after importing
+sometimes isn't saved. Details: [docs/development.md](docs/development.md#installing-or-updating-in-the-app).
+
+**Fonts**: Adwaita Sans and Adwaita Mono come with GNOME 48 and later. Elsewhere, Sable falls back to
+the system sans-serif and monospace fonts.
+
+## Sharing
+
+The two files in `dist/` are the whole theme. Send them any way you like. Sending them in a Matrix
+chat works well: Sable shows an install card for `.sable.css` files (Settings → *Show install cards
+for theme files*), so the recipient can install them straight from the chat. They're CSS, so Sable
+asks people to install themes only from people they trust.
+
+The accent is built in (yellow). For another GNOME accent, build a copy first:
+`python3 scripts/build.py blue`.
+
 ## What changes
 
 **Colours**: libadwaita 1.8's values, extracted from `libadwaita-1.so`. The sidebar is
@@ -39,12 +56,16 @@ setting still scales it, and a font chosen in Sable's settings still wins.
 - Rail tiles and the bottom tools are flat 9px buttons without outlines.
 
 **Room view**: a flat header bar in the view's colour with no bottom line, and an AdwWindowTitle
-(bold title, dim caption topic). 20px header icons (the optical size of GNOME's 16px symbolic icons for outline icons). The composer is an Adwaita entry with the 2px
-accent focus ring. Avatars are round, like AdwAvatar. The members panel shares the view colour, set off by a hairline.
+(bold title, dim caption topic). The composer is an Adwaita entry with the 2px accent focus ring.
+Avatars are round, like AdwAvatar. The members panel shares the view colour, set off by a hairline.
+
+**Icons**: 20px in the sidebar, header bars and composer (18px in menus). Sable's icons are thin
+outlines; at 20px they match the optical size of GNOME's filled 16px symbolic icons.
 
 **Controls**: 34px buttons with 9px corners and bold labels, accent-filled suggested actions;
 borderless tinted entries and selects; GTK switches; AdwToggleGroup for segmented choices;
-GTK tooltips; GTK overlay-style scrollbars (a 3px rounded slider, 8px under the pointer, no arrows) that fade in while the pointer is over a scrollable area and fade out after it leaves.
+GTK tooltips. Scrollbars are GTK overlay sliders: 3px, rounded, 8px under the pointer, no arrow
+buttons. They fade in while the pointer is over a scrollable area and fade out after it leaves.
 
 **Window decoration** (when Sable draws its own, Settings → Desktop app): no title strip. The
 header bars move the window, and the only button is GNOME's round 24px close button with GTK's
@@ -59,6 +80,16 @@ rows in 12px boxed-list cards with separators.
 
 Unchanged by design: people's own name colours (set in their Matrix profiles) and Sable's
 timeline layout.
+
+## Limitations
+
+- The layout rules target Sable 2.3.9's class names. A Sable update can change them; the colours
+  survive that, and parts of the layout may not.
+- The accent is fixed at build time: CSS can't read GNOME's accent setting. The same goes for the
+  window-button layout (close only).
+- Scrollbars appear on hover, not on wheel scrolling alone (CSS can't detect scrolling).
+- Electron can't round the corners of a frameless window (see *Window decoration*).
+- Not styled yet: the timeline layout, call UI, emoji board and the login pages.
 
 ## Changing the accent
 
@@ -77,9 +108,11 @@ python3 scripts/build.py            # writes dist/adwaita-{light,dark}.sable.css
 - `scripts/inspect.mjs`: drives a Sable started with
   `flatpak run moe.sable.client --remote-debugging-port=9333`. `theme <file>` previews a build
   without importing it, `shot <png>` takes a screenshot, `eval`, `click`, `hover` and `key` help
-  inspect markup.
+  inspect markup, and `upload` feeds a file to Sable's import button.
 
-The build refuses selectors that use Sable's per-build `svelte-*` hashes.
+The build refuses selectors that use Sable's per-build `svelte-*` hashes. How Sable's theming works,
+the design decisions, the dev loop and the install routine are in
+[docs/development.md](docs/development.md); changes are in [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
