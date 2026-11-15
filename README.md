@@ -30,7 +30,9 @@ text (links, accent labels) uses the oklab-clamped standalone tone (`#905300` li
 setting still scales it, and a font chosen in Sable's settings still wins.
 
 **Sidebar** (laid out like Files):
-- The space rail and the room list read as one sidebar, with one shade line at the content edge.
+- The room list is Files' sidebar. The space rail is the outer pane of a nested split view, as
+  libadwaita draws it: `secondary_sidebar_bg_color` with a shade line between the panes (and at the
+  content edge).
 - The list's name is the header bar title: bold 11pt, centred, 47px.
 - Rows as in `.navigation-sidebar`: 36px, 9px radius, 6px side margins, regular 11pt, a neutral
   selection fill instead of an accent bar; dim, regular section headings.
