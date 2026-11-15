@@ -57,10 +57,13 @@ setting still scales it, and a font chosen in Sable's settings still wins.
 
 **Room view**: a flat header bar in the view's colour with no bottom line, and an AdwWindowTitle
 (bold title, dim caption topic). The composer is an Adwaita entry with the 2px accent focus ring.
-Avatars are round, like AdwAvatar. The members panel shares the view colour, set off by a hairline.
+Avatars are round, like AdwAvatar. The side panels (members, threads, search, media, widgets)
+share the view colour, set off by a hairline. Hovering a message lifts it slightly, with
+libadwaita's card hover (3%) on a rounded box inset from the timeline's edges.
 
 **Icons**: 20px in the sidebar, header bars and composer (18px in menus). Sable's icons are thin
-outlines; at 20px they match the optical size of GNOME's filled 16px symbolic icons.
+outlines; at 20px they match the optical size of GNOME's filled 16px symbolic icons. The glyphs stay Sable's own (Phosphor); swapping in Adwaita's symbolic icons
+was tried and set aside (see [docs/development.md](docs/development.md#design-decisions)).
 
 **Controls**: 34px buttons with 9px corners and bold labels, accent-filled suggested actions;
 borderless tinted entries and selects; GTK switches; AdwToggleGroup for segmented choices;
