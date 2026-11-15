@@ -15,6 +15,10 @@ rules target Sable's class names, which can change between releases.
    portal reaches anything else.)
 2. Pick **Adwaita Light** in the *Light mode* row and **Adwaita Dark** in the *Dark mode* row.
 3. Set *Light or dark* to **System**, so Sable follows GNOME's style switch.
+4. Recommended: Settings → Desktop app → turn on **Use Sable's title bar**. The theme then folds
+   the title bar into GNOME-style header bars: they move the window, and the only window button is
+   GNOME's round close button (see *Window decoration* below). With the setting off, the system
+   draws its own title bar above Sable.
 
 To undo: pick *Sable (default)* in both rows, and remove the two themes.
 
@@ -70,7 +74,7 @@ borderless tinted entries and selects; GTK switches; AdwToggleGroup for segmente
 GTK tooltips. Scrollbars are GTK overlay sliders: 3px, rounded, 8px under the pointer, no arrow
 buttons. They fade in while the pointer is over a scrollable area and fade out after it leaves.
 
-**Window decoration** (when Sable draws its own, Settings → Desktop app): no title strip. The
+**Window decoration** (with Settings → Desktop app → *Use Sable's title bar* on): no title strip. The
 header bars move the window, and the only button is GNOME's round 24px close button with GTK's
 `window-close-symbolic`, 13px from the corner (GNOME's default `appmenu:close` layout, as in Adwaita
 for Tine). Electron can't round a frameless window's corners; the GNOME Shell extension

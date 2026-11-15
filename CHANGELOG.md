@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- README: recommends turning on Settings → Desktop app → *Use Sable's title bar*.
+
 ## 0.3.0 (2026-11-15)
 
 - Threads, search, media and widgets panels: the room view's colour with a hairline, like the

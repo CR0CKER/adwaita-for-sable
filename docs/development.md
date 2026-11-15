@@ -41,7 +41,7 @@ running app; re-check it after Sable updates.
 - **Scrollbars.** Sable styles `::-webkit-scrollbar`. Setting the standard `scrollbar-width` or
   `scrollbar-color` anywhere switches Chromium to its classic scrollbars, arrow buttons included, and
   overrides Sable's `.scrollbar-hidden`. Don't.
-- **Window decoration.** With Settings → Desktop app → client decorations,
+- **Window decoration.** With Settings → Desktop app → *Use Sable's title bar* (client decorations),
   `<html data-client-decorations="desktop">` and a fixed `.titlebar` (`.drag` with the title, then
   `.controls` with Minimise, Maximise and `.close`). Sable pushes the layout down through
   `--safe-top = safe-area-inset-top + --titlebar-height (2rem)`. With the native frame,
