@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed: with Sable's title bar on, the close button didn't respond to clicks since 0.2.0. The header
+  bars' window-drag area covered it; a no-drag strip at the end of each header bar cuts it out.
 - README: recommends turning on Settings → Desktop app → *Use Sable's title bar*.
 - Rail tiles and bottom tools no longer move on hover (Sable nudges them 2px right and 3px up);
   GNOME buttons only change their tint.

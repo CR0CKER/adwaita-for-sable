@@ -93,6 +93,13 @@ running app; re-check it after Sable updates.
   default `appmenu:close` (CSS can't read the GNOME setting). To show all three buttons, drop the
   `button:not(.close) { display: none }` rule, style the other two like `.close`, and set
   `--adw-wc-width` to 91px.
+- **Drag areas and the close button.** Electron applies `-webkit-app-region` areas in document order,
+  and `.titlebar` comes before the header bars, so their `drag` overrides the button's `no-drag` and
+  swallows real clicks. Each draggable header bar has an `::after` strip (no-drag, `--adw-wc-width`
+  + 6px) at its right end, which comes after it and cuts the button out. It is absolute, not fixed:
+  `.drawer-track` (`will-change: transform`) and `.room-view` (a size container) trap fixed elements.
+  Test this with a real mouse: CDP input reaches the page directly and never meets Electron's drag
+  areas, so a scripted click passes even when the button is dead.
 
 ## Dev loop
 
