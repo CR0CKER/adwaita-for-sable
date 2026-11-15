@@ -48,10 +48,7 @@ body.sable-remote-theme {
   --shadow-dialog: var(--shadow-e400);
   font-family: var(--font-family);
   font-size: var(--font-size-body);
-  /* Thin overlay-style scrollbars, GTK's 20% slider. */
-  scrollbar-color: color-mix(in srgb, currentColor 20%, transparent) transparent;
 }
-body.sable-remote-theme * { scrollbar-width: thin; }
 body.sable-remote-theme ::selection { background: var(--adw-selection); }
 
 /* ---- Sidebar: rail + room list read as one GNOME sidebar ------------------ */
@@ -457,4 +454,35 @@ body.sable-remote-theme .desktop-tools {
     linear-gradient(to right,
       var(--adw-secondary-sidebar-bg) var(--navigation-rail-width),
       var(--adw-sidebar-bg) var(--navigation-rail-width));
+}
+
+/* ---- Scrollbars: GTK overlay indicators -----------------------------------
+   Sable styles ::-webkit-scrollbar; setting the standard scrollbar-width /
+   scrollbar-color would switch Chromium to its classic bars, arrows included,
+   and undo Sable's hidden scrollbars. So: a 3px rounded slider, 8px under the
+   pointer, 20% of the text colour, no trough, no buttons. The :is(*, .viewport)
+   out-ranks the timeline's own .viewport rules. */
+body.sable-remote-theme { --timeline-scrollbar-size: 14px; }
+body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+  background: transparent;
+}
+body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-track,
+body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-corner { background: transparent; }
+body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--adw-fg) 20%, transparent);
+  background-clip: padding-box;
+  border: 5.5px solid transparent;
+  border-radius: 99px;
+  min-height: 40px;
+}
+body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-thumb:hover {
+  border-width: 3px;
+  background-color: color-mix(in srgb, var(--adw-fg) 40%, transparent);
+}
+body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-thumb:active {
+  border-width: 3px;
+  background-color: color-mix(in srgb, var(--adw-fg) 60%, transparent);
 }

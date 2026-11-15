@@ -44,7 +44,7 @@ accent focus ring. Avatars are round, like AdwAvatar. The members panel shares t
 
 **Controls**: 34px buttons with 9px corners and bold labels, accent-filled suggested actions;
 borderless tinted entries and selects; GTK switches; AdwToggleGroup for segmented choices;
-GTK tooltips; thin overlay-style scrollbars.
+GTK tooltips; GTK overlay-style scrollbars (a 3px rounded slider, 8px under the pointer, no arrows).
 
 **Popovers and settings**: 15px menus with 32px rows and destructive items in the error text
 colour. Settings reads as an AdwPreferencesDialog: a sidebar list, bold group titles, and setting
