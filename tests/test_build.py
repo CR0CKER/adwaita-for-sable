@@ -51,10 +51,21 @@ class GeneratedTheme(unittest.TestCase):
             if re.match(r"\s*body\.sable-remote-theme \*(:hover)?\s*\{", line):
                 self.fail(f"universal rule outside :where(): {line.strip()}")
 
+    def test_preview_has_the_same_metadata_and_only_the_seven_tokens(self):
+        for mode, css in self.css.items():
+            preview = build.render_preview(mode, "yellow")
+            meta = css[:css.index("*/") + 2]
+            self.assertTrue(preview.startswith(meta))
+            self.assertIn(f"fullThemeUrl: {build.CATALOG}/adwaita-{mode}.sable.css", meta)
+            props = re.findall(r"--sable-([\w-]+):", preview)
+            self.assertEqual(props, list(build.PREVIEW_TOKENS))
+
     def test_committed_dist_matches_the_sources(self):
         for mode, css in self.css.items():
-            with open(os.path.join(ROOT, "dist", f"adwaita-{mode}.sable.css")) as f:
-                self.assertEqual(f.read(), css, f"dist/adwaita-{mode}.sable.css is stale: run scripts/build.py")
+            for name, expected in ((f"adwaita-{mode}.sable.css", css),
+                                   (f"adwaita-{mode}.preview.sable.css", build.render_preview(mode, "yellow"))):
+                with open(os.path.join(ROOT, "dist", name)) as f:
+                    self.assertEqual(f.read(), expected, f"dist/{name} is stale: run scripts/build.py")
 
 
 if __name__ == "__main__":

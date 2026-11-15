@@ -106,12 +106,14 @@ timeline layout.
 ## Building
 
 ```bash
-python3 scripts/build.py                    # writes dist/adwaita-{light,dark}.sable.css
+python3 scripts/build.py                    # writes dist/adwaita-{light,dark}{,.preview}.sable.css
 python3 -m unittest discover -s tests       # checks the build (no dependencies)
 ```
 
 - `src/palette.py`: Adwaita values mapped onto Sable's colour tokens.
 - `src/structure.css`: the layout rules, shared by both files.
+- `dist/*.preview.sable.css`: the metadata and seven colours Sable's theme catalogue shows on its
+  preview card (only needed for the catalogue).
 - `scripts/accent.py`: GNOME accent colours and libadwaita's oklab clamp (shared with Adwaita for Tine).
 - `tests/test_build.py`: checks the accent argument, the `--adw-*` variables, and that `dist/` is current.
 - `scripts/inspect.mjs`: drives a Sable started with

@@ -1,0 +1,21 @@
+/*
+@sable-theme
+id: adwaita-light
+name: Adwaita Light
+author: CR0CKER
+description: GNOME's Adwaita, laid out like GNOME Files (yellow accent). v0.3.0
+kind: light
+contrast: low
+tags: light, gnome, adwaita
+fullThemeUrl: https://git.sable.moe/SableClient/themes/raw/branch/main/themes/adwaita-light.sable.css
+*/
+
+.sable-theme-preview {
+  --sable-bg-container: #ebebed;
+  --sable-bg-on-container: rgba(0, 0, 6, 0.8);
+  --sable-surface-container: #ffffff;
+  --sable-surface-container-line: rgba(0, 0, 6, 0.12);
+  --sable-surface-on-container: rgba(0, 0, 6, 0.8);
+  --sable-primary-main: #c88800;
+  --sable-primary-on-main: #ffffff;
+}

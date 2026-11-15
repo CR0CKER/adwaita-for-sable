@@ -7,6 +7,7 @@ description: GNOME's Adwaita, laid out like GNOME Files (yellow accent). v0.3.0
 kind: dark
 contrast: low
 tags: dark, gnome, adwaita
+fullThemeUrl: https://git.sable.moe/SableClient/themes/raw/branch/main/themes/adwaita-dark.sable.css
 */
 
 body.sable-remote-theme {

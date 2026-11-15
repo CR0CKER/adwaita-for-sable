@@ -1,0 +1,21 @@
+/*
+@sable-theme
+id: adwaita-dark
+name: Adwaita Dark
+author: CR0CKER
+description: GNOME's Adwaita, laid out like GNOME Files (yellow accent). v0.3.0
+kind: dark
+contrast: low
+tags: dark, gnome, adwaita
+fullThemeUrl: https://git.sable.moe/SableClient/themes/raw/branch/main/themes/adwaita-dark.sable.css
+*/
+
+.sable-theme-preview {
+  --sable-bg-container: #2e2e32;
+  --sable-bg-on-container: #ffffff;
+  --sable-surface-container: #1d1d20;
+  --sable-surface-container-line: rgba(255, 255, 255, 0.15);
+  --sable-surface-on-container: #ffffff;
+  --sable-primary-main: #c88800;
+  --sable-primary-on-main: #ffffff;
+}

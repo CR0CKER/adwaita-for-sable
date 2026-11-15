@@ -5,6 +5,8 @@
 - README: recommends turning on Settings → Desktop app → *Use Sable's title bar*.
 - Rail tiles and bottom tools no longer move on hover (Sable nudges them 2px right and 3px up);
   GNOME buttons only change their tint.
+- The build also writes `dist/adwaita-{light,dark}.preview.sable.css`, the preview files Sable's theme
+  catalogue needs, and both files' metadata carry the catalogue's `fullThemeUrl`.
 
 ## 0.3.0 (2026-11-15)
 
