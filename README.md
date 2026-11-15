@@ -40,7 +40,7 @@ setting still scales it, and a font chosen in Sable's settings still wins.
 
 **Room view**: a flat header bar in the view's colour with no bottom line, and an AdwWindowTitle
 (bold title, dim caption topic). 16px header icons. The composer is an Adwaita entry with the 2px
-accent focus ring. Avatars are round, like AdwAvatar. The members panel is a sidebar on the right.
+accent focus ring. Avatars are round, like AdwAvatar. The members panel shares the view colour, set off by a hairline.
 
 **Controls**: 34px buttons with 9px corners and bold labels, accent-filled suggested actions;
 borderless tinted entries and selects; GTK switches; AdwToggleGroup for segmented choices;

@@ -302,10 +302,11 @@ body.sable-remote-theme .panel-header :is(.room-topic, .subtitle) {
   font-weight: 400;
   color: var(--adw-dim-fg);
 }
-/* Members drawer: a sidebar on the right, its header bar in the same colour. */
+/* Members drawer: part of the room view (same view colour), set off by a
+   hairline in GTK's border colour rather than a sidebar shade. */
 body.sable-remote-theme .members-drawer {
-  background: var(--adw-sidebar-bg);
-  border-left: 1px solid var(--adw-sidebar-border);
+  background: var(--adw-view-bg);
+  border-left: 1px solid var(--adw-border);
   --surface-container-hover: var(--adw-row-hover);
   --surface-container-active: var(--adw-row-selected);
 }
