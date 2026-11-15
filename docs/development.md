@@ -64,6 +64,8 @@ running app; re-check it after Sable updates.
   `window_bg_color`.
 - **States.** Hover, active and selected are GTK's `alpha(currentColor, x)` tints, translucent so
   they read the same on every surface. Sidebar selection is neutral (10%), never the accent.
+  A hovered timeline message gets libadwaita's activatable-card lift (3%) on a 12px box inset 8px,
+  drawn as `::before` because the row carries the avatar gutter in its padding.
 - **Accent.** libadwaita fills with the system accent unchanged in both modes (`#c88800` for yellow),
   and writes accent text in an oklab-clamped standalone tone (lightness ≤ 0.5 in light mode, ≥ 0.85 in
   dark). This differs from Adwaita for Tine and Logseq, which also clamp the fill (light fills came

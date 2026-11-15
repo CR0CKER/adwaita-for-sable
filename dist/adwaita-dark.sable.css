@@ -98,6 +98,7 @@ body.sable-remote-theme {
   --adw-button-active: rgba(255, 255, 255, 0.3);
   --adw-flat-hover: rgba(255, 255, 255, 0.07);
   --adw-flat-active: rgba(255, 255, 255, 0.16);
+  --adw-card-hover: rgba(255, 255, 255, 0.03);
   --adw-accent: #c88800;
   --adw-accent-text: #ffc057;
   --adw-accent-text-hover: #ffc158;
@@ -553,6 +554,25 @@ body.sable-remote-theme .settings-outline :is(a:not([class]), a[class^="svelte-"
 body.sable-remote-theme .settings-outline :is(a:not([class]), a[class^="svelte-"]:not([class*=" "]))[aria-current=location],
 body.sable-remote-theme .settings-outline :is(a:not([class]), a[class^="svelte-"]:not([class*=" "])):hover {
   color: var(--adw-fg);
+}
+
+/* ---- Timeline messages ------------------------------------------------------ */
+/* Hover is libadwaita's activatable-card lift (3% tint), not a 7% row tint, on
+   a 12px rounded box 8px in from the timeline's edges. Sable's row bleeds 16px
+   into the timeline padding and carries the avatar gutter in its own padding,
+   so the box is a pseudo-element and the row's metrics stay untouched. */
+body.sable-remote-theme .items .message { isolation: isolate; }
+body.sable-remote-theme .items .message::before {
+  content: "";
+  position: absolute;
+  inset: 0 8px;
+  z-index: -1;
+  border-radius: var(--radius-outer);
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  body.sable-remote-theme .items .message:is(:hover, .menu-open) { background-color: transparent; }
+  body.sable-remote-theme .items .message:is(:hover, .menu-open)::before { background: var(--adw-card-hover); }
 }
 
 /* ---- Cards: libadwaita .card (12px, shadow, no outline) ------------------- */

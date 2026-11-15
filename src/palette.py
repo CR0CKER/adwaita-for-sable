@@ -151,6 +151,7 @@ def tokens(mode, accent="yellow"):
         "adw-row-selected": tint(.1), "adw-row-selected-hover": tint(.13),
         "adw-button": tint(.1), "adw-button-hover": tint(.15), "adw-button-active": tint(.3),
         "adw-flat-hover": tint(.07), "adw-flat-active": tint(.16),
+        "adw-card-hover": tint(.03),
         "adw-accent": acc_fill, "adw-accent-text": acc_text, "adw-accent-text-hover": acc_hover,
         "adw-selection": rgba(acc_rgb, .25),
         "adw-shade": a["shade"],

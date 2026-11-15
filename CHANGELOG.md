@@ -4,6 +4,8 @@
 
 - Threads, search, media and widgets panels: the room view's colour with a hairline, like the
   members panel.
+- Timeline: hovering a message lifts it with libadwaita's 3% card hover, on a 12px rounded box
+  inset from the timeline's edges, instead of a 7% edge-to-edge band.
 
 ## 0.2.0 (2026-11-15)
 
