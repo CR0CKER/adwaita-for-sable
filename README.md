@@ -31,7 +31,12 @@ the system sans-serif and monospace fonts.
 
 ## Sharing
 
-The two files in `dist/` are the whole theme. Send them any way you like. Sending them in a Matrix
+**Theme catalogue**: submitted to Sable's catalogue (Settings → Appearance → *Theme catalogue*) in
+[SableClient/themes#78](https://git.sable.moe/SableClient/themes/pulls/78). Once it's merged, both
+themes install from there.
+
+The two `dist/adwaita-*.sable.css` files are the whole theme (the `.preview` files are only for the
+catalogue). Send them any way you like. Sending them in a Matrix
 chat works well: Sable shows an install card for `.sable.css` files (Settings → *Show install cards
 for theme files*), so the recipient can install them straight from the chat. They're CSS, so Sable
 asks people to install themes only from people they trust.

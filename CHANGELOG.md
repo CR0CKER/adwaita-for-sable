@@ -7,6 +7,7 @@
   GNOME buttons only change their tint.
 - The build also writes `dist/adwaita-{light,dark}.preview.sable.css`, the preview files Sable's theme
   catalogue needs, and both files' metadata carry the catalogue's `fullThemeUrl`.
+- Submitted to Sable's theme catalogue: SableClient/themes#78.
 
 ## 0.3.0 (2026-11-15)
 
