@@ -80,7 +80,8 @@ running app; re-check it after Sable updates.
   are not in the system Adwaita set, and those icons are CC-BY-SA/LGPL (the theme is MIT).
 - **Scrollbar fade.** A registered, non-inheriting `@property --adw-sb` holds the slider colour.
   `*:hover` sets it, and the thumb takes it from its own element with `inherit`, so hovering an
-  ancestor doesn't light up every nested scrollbar. It fades in on hover and out 0.6s after the
+  ancestor doesn't light up every nested scrollbar. The two universal rules sit in `:where()`:
+  `transition` is a shorthand, so a weighted `*` rule replaced Sable's own transitions (0.2.0 did). It fades in on hover and out 0.6s after the
   pointer leaves. CSS can't detect scrolling itself, so unlike GTK it doesn't show on wheel scrolling
   alone.
 - **Window decoration.** GNOME apps have no title strip: `--titlebar-height` and `--safe-top` go to 0,
@@ -97,6 +98,7 @@ running app; re-check it after Sable updates.
 flatpak kill moe.sable.client                                # Sable must not already run
 flatpak run moe.sable.client --remote-debugging-port=9333 &
 python3 scripts/build.py
+python3 -m unittest discover -s tests                        # build checks, run before committing
 node scripts/inspect.mjs theme dist/adwaita-dark.sable.css   # live preview, not stored
 node scripts/inspect.mjs shot /path/to/shot.png
 ```

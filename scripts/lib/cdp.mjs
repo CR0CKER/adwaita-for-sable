@@ -3,9 +3,8 @@
  *
  * Every call carries its own timeout, because the failure mode that matters is
  * a renderer that stops answering: without a per-call deadline the whole suite
- * hangs instead of reporting which step died. (Logseq 0.10.13's renderer aborts
- * with SIGTRAP on some systems and does exactly this — the browser process
- * keeps serving /json/list while nothing renderer-side ever replies.)
+ * hangs instead of reporting which step died (the browser process can keep
+ * serving /json/list while nothing renderer-side ever replies).
  */
 
 const DEFAULT_TIMEOUT_MS = 15000;

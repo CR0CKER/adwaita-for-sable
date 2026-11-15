@@ -14,7 +14,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
-from accent import GNOME_ACCENTS, MODES, clamp  # noqa: E402
+from accent import GNOME_ACCENTS, clamp  # noqa: E402
 
 
 def hex_rgb(h):
@@ -35,7 +35,7 @@ def rgba(rgb, alpha):
 ADW = {
     "dark": {
         "window": "#222226", "view": "#1d1d20", "sidebar": "#2e2e32",
-        "secondary_sidebar": "#28282c", "popover": "#36363a", "dialog": "#36363a",
+        "secondary_sidebar": "#28282c", "popover": "#36363a",
         "fg_rgb": (255, 255, 255), "fg_alpha": 1.0,
         "shade": "rgba(0, 0, 6, 0.25)", "border_alpha": 0.15,
         "success": "#26a269", "warning": "#cd9309", "error": "#c01c28",
@@ -43,7 +43,7 @@ ADW = {
     },
     "light": {
         "window": "#fafafb", "view": "#ffffff", "sidebar": "#ebebed",
-        "secondary_sidebar": "#f3f3f5", "popover": "#ffffff", "dialog": "#fafafb",
+        "secondary_sidebar": "#f3f3f5", "popover": "#ffffff",
         "fg_rgb": (0, 0, 6), "fg_alpha": 0.8,
         "shade": "rgba(0, 0, 6, 0.07)", "border_alpha": 0.15,
         "success": "#2ec27e", "warning": "#e5a50a", "error": "#e01b24",
@@ -71,7 +71,6 @@ def tokens(mode, accent="yellow"):
     # (text) accent is the fill with its oklab lightness clamped.
     acc_fill = accent_hex
     acc_text = clamp(accent_hex, STANDALONE[mode])
-    acc_hover = clamp(acc_text, MODES[mode][2])
     acc_rgb = hex_rgb(acc_fill)
 
     t = {}
@@ -108,7 +107,7 @@ def tokens(mode, accent="yellow"):
     t.update({
         "primary-main": acc_fill,
         "primary-main-hover": f"color-mix(in srgb, {acc_fill} 90%, {'#ffffff' if mode == 'dark' else '#000006'})",
-        "primary-main-active": f"color-mix(in srgb, {acc_fill} 80%, {'#000006'})",
+        "primary-main-active": f"color-mix(in srgb, {acc_fill} 80%, #000006)",
         "primary-main-line": acc_fill,
         "primary-on-main": "#ffffff",
         "primary-container": over(a["view"], acc_rgb, .25),
@@ -146,13 +145,13 @@ def tokens(mode, accent="yellow"):
     extra = {
         "adw-window-bg": a["window"], "adw-view-bg": a["view"], "adw-sidebar-bg": a["sidebar"],
         "adw-secondary-sidebar-bg": a["secondary_sidebar"], "adw-popover-bg": a["popover"],
-        "adw-dialog-bg": a["dialog"], "adw-fg": fg, "adw-border": border,
-        "adw-dim-fg": tint(.55), "adw-row-hover": tint(.07), "adw-row-active": tint(.16),
+        "adw-fg": fg, "adw-border": border,
+        "adw-dim-fg": tint(.55), "adw-row-hover": tint(.07),
         "adw-row-selected": tint(.1), "adw-row-selected-hover": tint(.13),
         "adw-button": tint(.1), "adw-button-hover": tint(.15), "adw-button-active": tint(.3),
         "adw-flat-hover": tint(.07), "adw-flat-active": tint(.16),
         "adw-card-hover": tint(.03),
-        "adw-accent": acc_fill, "adw-accent-text": acc_text, "adw-accent-text-hover": acc_hover,
+        "adw-accent": acc_fill, "adw-accent-text": acc_text,
         "adw-selection": rgba(acc_rgb, .25),
         "adw-shade": a["shade"],
         "adw-sidebar-border": "rgba(0, 0, 6, 0.36)" if mode == "dark" else "rgba(0, 0, 6, 0.07)",

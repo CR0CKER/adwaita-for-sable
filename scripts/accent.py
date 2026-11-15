@@ -1,17 +1,10 @@
 #!/usr/bin/env python3
-"""Print the literal accent colours for theme.json from a GNOME accent.
+"""GNOME accent colours and the oklab lightness clamp libadwaita uses for them.
 
-Tine's theme packages only take literal colours, so the oklab lightness clamps
-Adwaita for Logseq applies at runtime (themes/adwaita.css) are computed here:
-
-    dark:  text max(L, 0.763), fill min(L, 0.674), hover max(L, 0.85)
-    light: text min(L, 0.5),   fill max(L, 0.62),  hover min(L, 0.42)
-
-Usage: scripts/accent.py [#rrggbb | blue | teal | green | yellow | orange | red |
-pink | purple | slate]   (default: yellow)
+Shared with Adwaita for Tine. src/palette.py derives the standalone (text)
+accent from the fill with clamp(), as libadwaita does.
 """
 import math
-import sys
 
 # libadwaita's @accent_bg_color per GNOME accent name.
 GNOME_ACCENTS = {
@@ -56,28 +49,3 @@ def clamp(hex_colour, fn):
     L, a, b = to_oklab(hex_colour)
     return from_oklab(fn(L), a, b)
 
-
-MODES = {
-    "light": (lambda L: min(L, 0.5), lambda L: max(L, 0.62), lambda L: min(L, 0.42)),
-    "dark": (lambda L: max(L, 0.763), lambda L: min(L, 0.674), lambda L: max(L, 0.85)),
-}
-
-
-def main():
-    arg = sys.argv[1] if len(sys.argv) > 1 else "yellow"
-    accent = GNOME_ACCENTS.get(arg, arg)
-    for mode, (text, fill, hover) in MODES.items():
-        fg = clamp(accent, text)
-        bg = clamp(fg, fill)  # the fill derives from the clamped text colour
-        r, g, b = (int(bg[i:i + 2], 16) for i in (1, 3, 5))
-        print(f'"{mode}": {{')
-        print(f'  "--ls-active-primary-color": "{bg}",')
-        print(f'  "--ls-link-text-color": "{fg}",')
-        print(f'  "--ls-link-text-hover-color": "{clamp(fg, hover)}",')
-        print(f'  "--ls-tag-text-color": "{fg}",')
-        print(f'  "--ls-selection-background-color": "rgba({r}, {g}, {b}, 0.3)"')
-        print("}")
-
-
-if __name__ == "__main__":
-    main()

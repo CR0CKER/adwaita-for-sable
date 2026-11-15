@@ -3,7 +3,7 @@
 id: adwaita-light
 name: Adwaita Light
 author: CR0CKER
-description: GNOME's Adwaita, laid out like GNOME Files (yellow accent). v0.2.0
+description: GNOME's Adwaita, laid out like GNOME Files (yellow accent). v0.3.0
 kind: light
 contrast: low
 tags: light, gnome, adwaita
@@ -85,12 +85,10 @@ body.sable-remote-theme {
   --adw-sidebar-bg: #ebebed;
   --adw-secondary-sidebar-bg: #f3f3f5;
   --adw-popover-bg: #ffffff;
-  --adw-dialog-bg: #fafafb;
   --adw-fg: rgba(0, 0, 6, 0.8);
   --adw-border: rgba(0, 0, 6, 0.12);
   --adw-dim-fg: rgba(0, 0, 6, 0.44);
   --adw-row-hover: rgba(0, 0, 6, 0.056);
-  --adw-row-active: rgba(0, 0, 6, 0.128);
   --adw-row-selected: rgba(0, 0, 6, 0.08);
   --adw-row-selected-hover: rgba(0, 0, 6, 0.104);
   --adw-button: rgba(0, 0, 6, 0.08);
@@ -101,7 +99,6 @@ body.sable-remote-theme {
   --adw-card-hover: rgba(0, 0, 6, 0.024);
   --adw-accent: #c88800;
   --adw-accent-text: #905300;
-  --adw-accent-text-hover: #763c00;
   --adw-selection: rgba(200, 136, 0, 0.25);
   --adw-shade: rgba(0, 0, 6, 0.07);
   --adw-sidebar-border: rgba(0, 0, 6, 0.07);
@@ -246,7 +243,6 @@ body.sable-remote-theme .room-nav-menu svg { width: var(--adw-icon-size); height
    6px side margins, regular 11pt. */
 body.sable-remote-theme .room-nav-actions { padding: 0 6px 6px; gap: 2px; }
 body.sable-remote-theme .room-list { padding-inline: 6px; }
-body.sable-remote-theme .room-list > .room-row-wrap,
 body.sable-remote-theme .room-list .room-row-wrap { margin-bottom: 2px; }
 body.sable-remote-theme :is(.nav-action, .room-nav-trigger, .room-row) {
   min-height: 36px;
@@ -537,7 +533,7 @@ body.sable-remote-theme :is(
   .bot-command-name, .context-kind, .drop-card, .empty-state-eyebrow, .error-code,
   .formatted-body .code-action, .jump-item svg, .link-host, .privacy-content a,
   .pusher-gateway-link, .reply-preview .reply-icon, .target-preview .target-icon,
-  .thread-summary, .inbox-tab[data-state=active], .summary .pin, .bot-command-name,
+  .thread-summary, .inbox-tab[data-state=active], .summary .pin,
   .composer-send:not(:disabled, [aria-disabled=true])
 ) {
   color: var(--adw-accent-text);
@@ -615,14 +611,18 @@ body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-button { display: n
 /* Fade: hidden until the pointer is over the scrolling element, then fades in
    (GTK also shows it on scroll; CSS can't see scrolling). --adw-sb does not
    inherit, so a hovered ancestor doesn't light up every scrollbar inside it;
-   the thumb takes it from its own element with `inherit`. */
+   the thumb takes it from its own element with `inherit`. Both rules sit in
+   :where() (no specificity): `transition` is a shorthand, so a weighted rule
+   here would replace Sable's own transitions (switch knob, row hovers,
+   progress bars). An element with its own transition keeps it and shows its
+   scrollbar without the fade. */
 @property --adw-sb {
   syntax: "<color>";
   inherits: false;
   initial-value: transparent;
 }
-body.sable-remote-theme * { transition: --adw-sb 0.3s ease 0.6s; }
-body.sable-remote-theme *:hover {
+:where(body.sable-remote-theme *) { transition: --adw-sb 0.3s ease 0.6s; }
+:where(body.sable-remote-theme *:hover) {
   --adw-sb: color-mix(in srgb, var(--adw-fg) 20%, transparent);
   transition-delay: 0s;
 }

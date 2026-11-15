@@ -19,7 +19,7 @@ try {
     console.log(arg);
   } else if (cmd === 'click' || cmd === 'hover') {
     // click/hover <css selector> | <x,y>: real input events at the element's centre.
-    let [x, y] = arg.includes(',') && !/[.#\[]/.test(arg) ? arg.split(',').map(Number) : [];
+    let [x, y] = /^\d+(\.\d+)?,\d+(\.\d+)?$/.test(arg) ? arg.split(',').map(Number) : [];
     if (x === undefined) {
       const r = JSON.parse(await cdp.evaluate(`JSON.stringify(document.querySelector(${JSON.stringify(arg)})?.getBoundingClientRect())`) ?? 'null');
       if (!r) throw new Error(`no element ${arg}`);

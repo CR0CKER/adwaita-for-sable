@@ -11,7 +11,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "src"))
 import palette  # noqa: E402
 
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 SCOPE = "body.sable-remote-theme"
 LIMIT = 1024 * 1024
 
@@ -28,7 +28,20 @@ tags: {mode}, gnome, adwaita
 """
 
 
-def build(mode, accent):
+def parse_accent(arg):
+    """Return a GNOME accent name or a #rrggbb colour; anything else is an error.
+
+    The value lands in the theme header comment and in colour maths, so it is
+    checked here rather than trusted.
+    """
+    if arg in palette.GNOME_ACCENTS or re.fullmatch(r"#[0-9a-fA-F]{6}", arg):
+        return arg
+    names = ", ".join(palette.GNOME_ACCENTS)
+    raise SystemExit(f"accent must be one of {names} or #rrggbb, not {arg!r}")
+
+
+def render(mode, accent):
+    """Return the theme CSS for one mode."""
     t, extra = palette.tokens(mode, accent)
     lines = [HEADER.format(mode=mode, Mode=mode.capitalize(), accent=accent, version=VERSION)]
     lines.append(f"{SCOPE} {{")
@@ -40,8 +53,16 @@ def build(mode, accent):
     with open(os.path.join(ROOT, "src", "structure.css")) as f:
         lines.append(f.read())
     css = "\n".join(lines)
-    assert not re.search(r"svelte-[a-z0-9]{5,}", css), "selectors must not depend on per-build svelte hashes"
-    assert len(css.encode()) < LIMIT
+    if re.search(r"svelte-[a-z0-9]{5,}", css):
+        raise SystemExit("selectors must not depend on per-build svelte hashes")
+    if len(css.encode()) >= LIMIT:
+        raise SystemExit("theme is over Sable's 1 MiB limit")
+    return css
+
+
+def build(mode, accent):
+    """Write dist/adwaita-<mode>.sable.css."""
+    css = render(mode, accent)
     out = os.path.join(ROOT, "dist", f"adwaita-{mode}.sable.css")
     with open(out, "w") as f:
         f.write(css)
@@ -49,6 +70,6 @@ def build(mode, accent):
 
 
 if __name__ == "__main__":
-    accent = sys.argv[1] if len(sys.argv) > 1 else "yellow"
+    accent = parse_accent(sys.argv[1] if len(sys.argv) > 1 else "yellow")
     for mode in ("light", "dark"):
         build(mode, accent)

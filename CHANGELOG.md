@@ -1,11 +1,17 @@
 # Changelog
 
-## Unreleased
+## 0.3.0 (2026-11-15)
 
 - Threads, search, media and widgets panels: the room view's colour with a hairline, like the
   members panel.
 - Timeline: hovering a message lifts it with libadwaita's 3% card hover, on a 12px rounded box
   inset from the timeline's edges, instead of a 7% edge-to-edge band.
+- Fixed: the scrollbar fade replaced Sable's own transitions on elements with simpler selectors
+  (switch knob, row and button hover fades, progress bars). It no longer overrides them.
+- `scripts/build.py` rejects an accent that isn't a GNOME accent name or `#rrggbb`.
+- Tests: `python3 -m unittest discover -s tests` checks the accent argument, that every `--adw-*`
+  variable is declared and used, that `dist/` matches the sources, and the transition fix.
+- Removed unused tokens and the Logseq printer in `scripts/accent.py`.
 
 ## 0.2.0 (2026-11-15)
 

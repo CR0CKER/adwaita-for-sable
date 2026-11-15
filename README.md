@@ -102,18 +102,21 @@ timeline layout.
 ## Building
 
 ```bash
-python3 scripts/build.py            # writes dist/adwaita-{light,dark}.sable.css
+python3 scripts/build.py                    # writes dist/adwaita-{light,dark}.sable.css
+python3 -m unittest discover -s tests       # checks the build (no dependencies)
 ```
 
 - `src/palette.py`: Adwaita values mapped onto Sable's colour tokens.
 - `src/structure.css`: the layout rules, shared by both files.
-- `scripts/accent.py`: oklab helpers (from Adwaita for Tine).
+- `scripts/accent.py`: GNOME accent colours and libadwaita's oklab clamp (shared with Adwaita for Tine).
+- `tests/test_build.py`: checks the accent argument, the `--adw-*` variables, and that `dist/` is current.
 - `scripts/inspect.mjs`: drives a Sable started with
   `flatpak run moe.sable.client --remote-debugging-port=9333`. `theme <file>` previews a build
   without importing it, `shot <png>` takes a screenshot, `eval`, `click`, `hover` and `key` help
   inspect markup, and `upload` feeds a file to Sable's import button.
 
-The build refuses selectors that use Sable's per-build `svelte-*` hashes. How Sable's theming works,
+The build refuses selectors that use Sable's per-build `svelte-*` hashes. `inspect.mjs` needs
+Node 22 or later. How Sable's theming works,
 the design decisions, the dev loop and the install routine are in
 [docs/development.md](docs/development.md); changes are in [CHANGELOG.md](CHANGELOG.md).
 
