@@ -46,6 +46,13 @@ accent focus ring. Avatars are round, like AdwAvatar. The members panel shares t
 borderless tinted entries and selects; GTK switches; AdwToggleGroup for segmented choices;
 GTK tooltips; GTK overlay-style scrollbars (a 3px rounded slider, 8px under the pointer, no arrows) that fade in while the pointer is over a scrollable area and fade out after it leaves.
 
+**Window decoration** (when Sable draws its own, Settings → Desktop app): no title strip. The
+header bars move the window, and the only button is GNOME's round 24px close button with GTK's
+`window-close-symbolic`, 13px from the corner (GNOME's default `appmenu:close` layout, as in Adwaita
+for Tine). Electron can't round a frameless window's corners; the GNOME Shell extension
+[Rounded Window Corners Reborn](https://extensions.gnome.org/extension/7048/rounded-window-corners-reborn/)
+can (15px matches libadwaita).
+
 **Popovers and settings**: 15px menus with 32px rows and destructive items in the error text
 colour. Settings reads as an AdwPreferencesDialog: a sidebar list, bold group titles, and setting
 rows in 12px boxed-list cards with separators.

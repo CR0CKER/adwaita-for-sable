@@ -621,3 +621,69 @@ body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-thumb:active {
   border-width: 3px;
   background-color: color-mix(in srgb, var(--adw-fg) 60%, transparent);
 }
+
+/* ---- Window decoration (Sable's own, "client decorations") ----------------
+   GNOME apps have no title strip: the window buttons sit at the end of the
+   header bar and the header bars move the window. So Sable's 32px strip is
+   folded away (its --safe-top offset goes), and what is left of it is the
+   close button, a 24px GTK titlebutton 13px from the edge. Close only, as in
+   GNOME's default button-layout 'appmenu:close' (same as Adwaita for Tine).
+   Only applies while Sable draws its own decorations. */
+:root[data-client-decorations=desktop] body.sable-remote-theme {
+  --titlebar-height: 0px;
+  --safe-top: var(--safe-area-inset-top, 0px);
+  --adw-wc-width: 37px;
+}
+:root[data-client-decorations=desktop] body.sable-remote-theme .titlebar {
+  left: auto;
+  width: auto;
+  height: 47px;
+  background: transparent;
+  border: 0;
+  pointer-events: none;
+}
+:root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .drag { display: none; }
+:root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls {
+  align-items: center;
+  gap: 3px;
+  padding-right: 13px;
+  pointer-events: auto;
+}
+:root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls button:not(.close) { display: none; }
+:root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls button.close {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--adw-button);
+  color: var(--adw-fg);
+}
+:root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls button.close:hover {
+  background: var(--adw-button-hover);
+  color: var(--adw-fg);
+}
+:root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls button.close:active {
+  background: var(--adw-button-active);
+}
+:root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls button.close svg { display: none; }
+/* GTK's window-close-symbolic, verbatim from the Adwaita icon theme. */
+:root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls button.close::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20height%3D%2216px%22%20viewBox%3D%220%200%2016%2016%22%20width%3D%2216px%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Cpath%20d%3D%22m%204%204%20h%201%20h%200.03125%20c%200.253906%200.011719%200.511719%200.128906%200.6875%200.3125%20l%202.28125%202.28125%20l%202.3125%20-2.28125%20c%200.265625%20-0.230469%200.445312%20-0.304688%200.6875%20-0.3125%20h%201%20v%201%20c%200%200.285156%20-0.035156%200.550781%20-0.25%200.75%20l%20-2.28125%202.28125%20l%202.25%202.25%20c%200.1875%200.1875%200.28125%200.453125%200.28125%200.71875%20v%201%20h%20-1%20c%20-0.265625%200%20-0.53125%20-0.09375%20-0.71875%20-0.28125%20l%20-2.28125%20-2.28125%20l%20-2.28125%202.28125%20c%20-0.1875%200.1875%20-0.453125%200.28125%20-0.71875%200.28125%20h%20-1%20v%20-1%20c%200%20-0.265625%200.09375%20-0.53125%200.28125%20-0.71875%20l%202.28125%20-2.25%20l%20-2.28125%20-2.28125%20c%20-0.210938%20-0.195312%20-0.304688%20-0.46875%20-0.28125%20-0.75%20z%20m%200%200%22%2F%3E%20%3C%2Fsvg%3E") center / 16px 16px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20height%3D%2216px%22%20viewBox%3D%220%200%2016%2016%22%20width%3D%2216px%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Cpath%20d%3D%22m%204%204%20h%201%20h%200.03125%20c%200.253906%200.011719%200.511719%200.128906%200.6875%200.3125%20l%202.28125%202.28125%20l%202.3125%20-2.28125%20c%200.265625%20-0.230469%200.445312%20-0.304688%200.6875%20-0.3125%20h%201%20v%201%20c%200%200.285156%20-0.035156%200.550781%20-0.25%200.75%20l%20-2.28125%202.28125%20l%202.25%202.25%20c%200.1875%200.1875%200.28125%200.453125%200.28125%200.71875%20v%201%20h%20-1%20c%20-0.265625%200%20-0.53125%20-0.09375%20-0.71875%20-0.28125%20l%20-2.28125%20-2.28125%20l%20-2.28125%202.28125%20c%20-0.1875%200.1875%20-0.453125%200.28125%20-0.71875%200.28125%20h%20-1%20v%20-1%20c%200%20-0.265625%200.09375%20-0.53125%200.28125%20-0.71875%20l%202.28125%20-2.25%20l%20-2.28125%20-2.28125%20c%20-0.210938%20-0.195312%20-0.304688%20-0.46875%20-0.28125%20-0.75%20z%20m%200%200%22%2F%3E%20%3C%2Fsvg%3E") center / 16px 16px no-repeat;
+}
+/* Room for the button at the end of whichever header bar reaches the corner. */
+:root[data-client-decorations=desktop] body.sable-remote-theme .room-view > .panel-header {
+  padding-right: calc(var(--adw-wc-width) + 6px);
+}
+/* Header bars move the window; their controls don't. */
+:root[data-client-decorations=desktop] body.sable-remote-theme :is(.panel-header, .room-nav-header, .settings-nav-header) {
+  -webkit-app-region: drag;
+}
+:root[data-client-decorations=desktop] body.sable-remote-theme :is(.panel-header, .room-nav-header, .settings-nav-header) :is(button, a, input, [role=button], [tabindex]) {
+  -webkit-app-region: no-drag;
+}
