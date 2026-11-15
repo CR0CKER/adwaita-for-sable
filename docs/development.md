@@ -162,6 +162,17 @@ Sable team's Forgejo; themes go in by pull request (submitted as #78).
   the fork, push, and open a new PR. The preview card can only be checked once the files are on
   their `main` (the catalogue reads from there).
 
+## Reporting to Sable
+
+Sable's issues and pull requests live at
+[SableClient/Sable-next](https://git.sable.moe/SableClient/Sable-next) on git.sable.moe (the GitHub
+`SableClient/Sable` redirects to the archived `Sable-Legacy`). Its public API answers without a
+token: `https://git.sable.moe/api/v1/repos/SableClient/Sable-next/issues?state=all&q=…`.
+
+- **Ctrl+Q / Ctrl+W** do nothing in 2.3.9: added for #954, removed with the Tauri shell, reported as
+  [#1919](https://git.sable.moe/SableClient/sable-next/issues/1919). Not a theme issue (CSS can't
+  touch shortcuts).
+
 ## After a Sable update
 
 - Re-check the selectors against the new markup, above all: room header (`room-identity`,

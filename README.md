@@ -102,6 +102,8 @@ timeline layout.
 - Scrollbars appear on hover, not on wheel scrolling alone (CSS can't detect scrolling).
 - Electron can't round the corners of a frameless window (see *Window decoration*).
 - Not styled yet: the timeline layout, call UI, emoji board and the login pages.
+- Not the theme: Ctrl+Q doesn't quit Sable 2.3.9 (a Sable regression,
+  [Sable-next#1919](https://git.sable.moe/SableClient/sable-next/issues/1919)).
 
 ## Changing the accent
 
