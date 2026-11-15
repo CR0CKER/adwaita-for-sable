@@ -423,6 +423,14 @@ body.sable-remote-theme :is(
 body.sable-remote-theme :is(a:not([class]), a[class^="svelte-"]:not([class*=" "])) {
   color: var(--adw-accent-text);
 }
+/* ...except navigation lists, which are rows, not links. */
+body.sable-remote-theme .settings-outline :is(a:not([class]), a[class^="svelte-"]:not([class*=" "])) {
+  color: var(--adw-dim-fg);
+}
+body.sable-remote-theme .settings-outline :is(a:not([class]), a[class^="svelte-"]:not([class*=" "]))[aria-current=location],
+body.sable-remote-theme .settings-outline :is(a:not([class]), a[class^="svelte-"]:not([class*=" "])):hover {
+  color: var(--adw-fg);
+}
 
 /* ---- Cards: libadwaita .card (12px, shadow, no outline) ------------------- */
 body.sable-remote-theme :is(.settings-changes, .action-card, .profile-card-panel.framed) {

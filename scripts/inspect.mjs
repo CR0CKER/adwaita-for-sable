@@ -31,6 +31,16 @@ try {
       await cdp.call('Input.dispatchMouseEvent', { type: 'mouseReleased', x, y, button: 'left', clickCount: 1 });
     }
     console.log(`${cmd} ${Math.round(x)},${Math.round(y)}`);
+  } else if (cmd === 'upload') {
+    // upload <css selector> <file>: hand a file to an <input type=file>, as a
+    // file chooser would. The path must be visible inside Sable's sandbox
+    // (~/Downloads).
+    const file = process.argv[4];
+    const { root } = await cdp.call('DOM.getDocument', { depth: 0 });
+    const { nodeId } = await cdp.call('DOM.querySelector', { nodeId: root.nodeId, selector: arg });
+    if (!nodeId) throw new Error(`no element ${arg}`);
+    await cdp.call('DOM.setFileInputFiles', { nodeId, files: [file] });
+    console.log(`uploaded ${file}`);
   } else if (cmd === 'key') {
     await cdp.call('Input.dispatchKeyEvent', { type: 'keyDown', key: arg, code: arg, windowsVirtualKeyCode: arg === 'Escape' ? 27 : 0 });
     await cdp.call('Input.dispatchKeyEvent', { type: 'keyUp', key: arg, code: arg, windowsVirtualKeyCode: arg === 'Escape' ? 27 : 0 });
