@@ -1,0 +1,549 @@
+/*
+@sable-theme
+id: adwaita-light
+name: Adwaita Light
+author: CR0CKER
+description: GNOME's Adwaita, laid out like GNOME Files (yellow accent). v0.1.0
+kind: light
+contrast: low
+tags: light, gnome, adwaita
+*/
+
+body.sable-remote-theme {
+  /* Sable colour tokens */
+  --sable-bg-container: #ebebed;
+  --sable-bg-container-hover: rgba(0, 0, 6, 0.056);
+  --sable-bg-container-active: rgba(0, 0, 6, 0.096);
+  --sable-bg-container-line: rgba(0, 0, 6, 0.12);
+  --sable-bg-on-container: rgba(0, 0, 6, 0.8);
+  --sable-surface-container: #ffffff;
+  --sable-surface-container-hover: rgba(0, 0, 6, 0.056);
+  --sable-surface-container-active: rgba(0, 0, 6, 0.096);
+  --sable-surface-container-line: rgba(0, 0, 6, 0.12);
+  --sable-surface-on-container: rgba(0, 0, 6, 0.8);
+  --sable-surface-var-container: #efefef;
+  --sable-surface-var-container-hover: #e2e2e3;
+  --sable-surface-var-container-active: #dadadb;
+  --sable-surface-var-container-line: rgba(0, 0, 6, 0.12);
+  --sable-surface-var-on-container: rgba(0, 0, 6, 0.8);
+  --sable-sec-main: rgba(0, 0, 6, 0.8);
+  --sable-sec-main-hover: rgba(0, 0, 6, 0.8);
+  --sable-sec-main-active: rgba(0, 0, 6, 0.8);
+  --sable-sec-main-line: rgba(0, 0, 6, 0.12);
+  --sable-sec-on-main: #ffffff;
+  --sable-sec-container: rgba(0, 0, 6, 0.08);
+  --sable-sec-container-hover: rgba(0, 0, 6, 0.12);
+  --sable-sec-container-active: rgba(0, 0, 6, 0.16);
+  --sable-sec-container-line: rgba(0, 0, 6, 0.12);
+  --sable-sec-on-container: rgba(0, 0, 6, 0.8);
+  --sable-primary-main: #c88800;
+  --sable-primary-main-hover: color-mix(in srgb, #c88800 90%, #000006);
+  --sable-primary-main-active: color-mix(in srgb, #c88800 80%, #000006);
+  --sable-primary-main-line: #c88800;
+  --sable-primary-on-main: #ffffff;
+  --sable-primary-container: #f1e1bf;
+  --sable-primary-container-hover: #edd9ad;
+  --sable-primary-container-active: #e9cf99;
+  --sable-primary-container-line: #e4c480;
+  --sable-primary-on-container: rgba(0, 0, 6, 0.8);
+  --sable-success-main: #2ec27e;
+  --sable-success-main-hover: color-mix(in srgb, #2ec27e 90%, #000006);
+  --sable-success-main-active: color-mix(in srgb, #2ec27e 80%, #000006);
+  --sable-success-main-line: #2ec27e;
+  --sable-success-on-main: #ffffff;
+  --sable-success-container: #d5f3e5;
+  --sable-success-container-hover: #c9efdd;
+  --sable-success-container-active: #bcebd6;
+  --sable-success-container-line: #a1e4c5;
+  --sable-success-on-container: #007c3d;
+  --sable-warn-main: #e5a50a;
+  --sable-warn-main-hover: color-mix(in srgb, #e5a50a 90%, #000006);
+  --sable-warn-main-active: color-mix(in srgb, #e5a50a 80%, #000006);
+  --sable-warn-main-line: #e5a50a;
+  --sable-warn-on-main: rgba(0, 0, 0, 0.8);
+  --sable-warn-container: #faedce;
+  --sable-warn-container-hover: #f8e8bf;
+  --sable-warn-container-active: #f7e2b1;
+  --sable-warn-container-line: #f3d691;
+  --sable-warn-on-container: #905400;
+  --sable-crit-main: #e01b24;
+  --sable-crit-main-hover: color-mix(in srgb, #e01b24 90%, #000006);
+  --sable-crit-main-active: color-mix(in srgb, #e01b24 80%, #000006);
+  --sable-crit-main-line: #e01b24;
+  --sable-crit-on-main: #ffffff;
+  --sable-crit-container: #f9d1d3;
+  --sable-crit-container-hover: #f7c4c6;
+  --sable-crit-container-active: #f5b6b9;
+  --sable-crit-container-line: #f1989c;
+  --sable-crit-on-container: #c30000;
+  --sable-focus-ring: rgba(200, 136, 0, 0.5);
+  --sable-shadow: rgba(0, 0, 6, 0.07);
+  --sable-overlay: rgba(0, 0, 6, 0.25);
+  /* Adwaita values for the structure rules */
+  --adw-window-bg: #fafafb;
+  --adw-view-bg: #ffffff;
+  --adw-sidebar-bg: #ebebed;
+  --adw-secondary-sidebar-bg: #f3f3f5;
+  --adw-popover-bg: #ffffff;
+  --adw-dialog-bg: #fafafb;
+  --adw-fg: rgba(0, 0, 6, 0.8);
+  --adw-border: rgba(0, 0, 6, 0.12);
+  --adw-dim-fg: rgba(0, 0, 6, 0.44);
+  --adw-row-hover: rgba(0, 0, 6, 0.056);
+  --adw-row-active: rgba(0, 0, 6, 0.128);
+  --adw-row-selected: rgba(0, 0, 6, 0.08);
+  --adw-row-selected-hover: rgba(0, 0, 6, 0.104);
+  --adw-button: rgba(0, 0, 6, 0.08);
+  --adw-button-hover: rgba(0, 0, 6, 0.12);
+  --adw-button-active: rgba(0, 0, 6, 0.24);
+  --adw-flat-hover: rgba(0, 0, 6, 0.056);
+  --adw-flat-active: rgba(0, 0, 6, 0.128);
+  --adw-accent: #c88800;
+  --adw-accent-text: #905300;
+  --adw-accent-text-hover: #763c00;
+  --adw-selection: rgba(200, 136, 0, 0.25);
+  --adw-shade: rgba(0, 0, 6, 0.07);
+  --adw-sidebar-border: rgba(0, 0, 6, 0.07);
+  --adw-popover-shadow: 0 1px 5px 1px rgba(0, 0, 6, 0.09), 0 2px 14px 3px rgba(0, 0, 6, 0.05);
+  --adw-card-bg: #ffffff;
+  --adw-card-shade: rgba(0, 0, 6, 0.07);
+  --adw-card-shadow: 0 0 0 1px rgba(0, 0, 6, 0.03), 0 1px 3px 1px rgba(0, 0, 6, 0.07), 0 2px 6px 2px rgba(0, 0, 6, 0.03);
+  --adw-toggle-active-bg: #ffffff;
+  --adw-toggle-active-fg: rgba(0, 0, 6, 0.8);
+  --adw-popover-outline: rgba(0, 0, 6, 0.07);
+}
+
+/* ==========================================================================
+   Adwaita for Sable: structure (shared by light and dark).
+   Selectors use Sable's semantic class names only, never per-build hashes.
+   Sizes are libadwaita 1.8's (GNOME 49), measured against GNOME Files.
+   ========================================================================== */
+
+/* ---- Type, shape and density tokens -------------------------------------- */
+body.sable-remote-theme,
+body.sable-remote-theme .text-scale-scope {
+  /* GNOME's 11pt interface font; Sable's text-size setting still scales it. */
+  --font-size-x-small: calc(9pt * var(--text-scale));
+  --font-size-small: calc(9pt * var(--text-scale));
+  --font-size-label: calc(10.5pt * var(--text-scale));
+  --font-size-body: calc(11pt * var(--text-scale));
+  --font-size-subheading: calc(11pt * var(--text-scale));
+  --font-size-heading: calc(13pt * var(--text-scale));
+  --font-size-editor: calc(11pt * var(--text-scale));
+  --line-height-small: calc(1.15rem * var(--text-scale));
+}
+body.sable-remote-theme {
+  /* Adwaita Sans/Mono. --font-family resolves on <html>, so both it and its
+     base are set here (a font chosen in Settings still wins: inline style). */
+  --font-family-base: "Adwaita Sans", var(--font-family-emoji), sans-serif;
+  --font-family: var(--font-family-base);
+  --font-family-mono-base: "Adwaita Mono", monospace;
+  --font-family-mono: var(--font-family-mono-base);
+  /* Medium = semibold in Sable; GNOME uses regular and bold only. */
+  --font-weight-medium: 400;
+  /* libadwaita radii: 9px controls and rows, 12px cards, 15px popovers. */
+  --radius: 9px;
+  --radius-outer: 12px;
+  --radius-padding: 3px;
+  --radii-300: 6px;
+  --radii-400: 9px;
+  --radii-500: 12px;
+  /* 34px buttons and entries; 47px header bars. */
+  --control-height-300: 34px;
+  --control-height-small: 34px;
+  --header-height: 47px;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 0;
+  /* Popover/dialog shadows as libadwaita draws them. */
+  --shadow-e100: 0 1px 3px 1px var(--adw-shade);
+  --shadow-e200: var(--adw-popover-shadow);
+  --shadow-e300: var(--adw-popover-shadow);
+  --shadow-float: var(--adw-popover-shadow);
+  --shadow-e400: 0 0 0 1px var(--adw-popover-outline), 0 2px 14px 3px rgba(0, 0, 6, 0.25);
+  --shadow-dialog: var(--shadow-e400);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  /* Thin overlay-style scrollbars, GTK's 20% slider. */
+  scrollbar-color: color-mix(in srgb, currentColor 20%, transparent) transparent;
+}
+body.sable-remote-theme * { scrollbar-width: thin; }
+body.sable-remote-theme ::selection { background: var(--adw-selection); }
+
+/* ---- Sidebar: rail + room list read as one GNOME sidebar ------------------ */
+body.sable-remote-theme :is(.rail, .room-nav, .desktop-tools) {
+  background: var(--adw-sidebar-bg);
+  color: var(--adw-fg);
+  /* Inside the sidebar, Sable's view-surface states become sidebar tints. */
+  --surface-container-hover: var(--adw-row-hover);
+  --surface-container-active: var(--adw-row-selected);
+  --surface-on-container: var(--adw-fg);
+  --ghost-hover: var(--adw-flat-hover);
+  --ghost-active: var(--adw-flat-active);
+}
+/* No line between the rail and the list; one shade line where the sidebar
+   meets the content, as AdwOverlaySplitView draws it. */
+body.sable-remote-theme .rail { border-right: 0; }
+body.sable-remote-theme :is(.room-nav, .desktop-tools) {
+  border-right: 1px solid var(--adw-sidebar-border);
+}
+body.sable-remote-theme .desktop-tools { border-top: 0; }
+body.sable-remote-theme .rail-separator { background: var(--adw-border); }
+
+/* Rail tiles: flat 9px buttons; the selected one gets the sidebar's selection
+   fill instead of Sable's accent bar on the left. */
+body.sable-remote-theme .nav-tab,
+body.sable-remote-theme .nav-tab-outlined {
+  border-color: transparent;
+  border-radius: 9px;
+}
+body.sable-remote-theme .nav-tab:hover { background: var(--adw-row-hover); }
+body.sable-remote-theme .nav-tab:is([aria-current=page], [data-current=true]),
+body.sable-remote-theme .nav-tab.selection-open:is([data-state=open], [aria-expanded=true]) {
+  background: var(--adw-row-selected);
+}
+body.sable-remote-theme .nav-tab:is([aria-current=page], [data-current=true]):hover {
+  background: var(--adw-row-selected-hover);
+}
+body.sable-remote-theme .nav-tab::before { display: none !important; }
+body.sable-remote-theme .nav-tab .avatar-root { border-radius: 9px; }
+body.sable-remote-theme .nav-tab-bottom:is([aria-current=page], [data-current=true]) > .avatar-root::after {
+  box-shadow: none;
+}
+
+/* Sidebar header bar: the list's name is the title, bold 11pt and centred,
+   as Files' sidebar header shows its title. */
+body.sable-remote-theme .room-nav-header {
+  flex-basis: 47px;
+  min-height: 47px;
+  padding: 0 6px 0 6px;
+}
+body.sable-remote-theme .room-nav-header h2 {
+  flex: 1;
+  min-width: 0;
+  padding-left: 34px; /* balances the menu button on the right */
+  text-align: center;
+  font-size: 11pt;
+  font-weight: 700;
+}
+body.sable-remote-theme .room-nav-header.collapsed h2 { padding-left: 0; }
+body.sable-remote-theme .room-nav-menu {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  color: inherit;
+}
+body.sable-remote-theme .room-nav-menu:hover { background: var(--adw-flat-hover); }
+body.sable-remote-theme .room-nav-menu svg { width: 16px; height: 16px; }
+
+/* Rows: libadwaita .navigation-sidebar > row: 36px, 9px radius, 0 8px padding,
+   6px side margins, regular 11pt. */
+body.sable-remote-theme .room-nav-actions { padding: 0 6px 6px; gap: 2px; }
+body.sable-remote-theme .room-list { padding-inline: 6px; }
+body.sable-remote-theme .room-list > .room-row-wrap,
+body.sable-remote-theme .room-list .room-row-wrap { margin-bottom: 2px; }
+body.sable-remote-theme :is(.nav-action, .room-nav-trigger, .room-row) {
+  min-height: 36px;
+  border-radius: 9px;
+  font-size: 11pt;
+  font-weight: 400;
+}
+body.sable-remote-theme :is(.nav-action, .room-row-wrap, .room-nav-trigger):hover {
+  background: var(--adw-row-hover);
+}
+body.sable-remote-theme :is(.nav-action, .room-row, .room-nav-trigger):is([aria-current=page], [data-current=true]),
+body.sable-remote-theme :is(.nav-action, .room-row, .room-nav-trigger):is([aria-current=page], [data-current=true]):hover {
+  background: var(--adw-row-selected);
+  color: var(--adw-fg);
+}
+body.sable-remote-theme .room-row-wrap:focus-within { background: var(--adw-row-hover); }
+/* Symbolic row icons at Files' 70% opacity. */
+body.sable-remote-theme .nav-action .room-icon { opacity: 0.7; }
+body.sable-remote-theme .nav-action .room-icon svg { width: 16px; height: 16px; }
+
+/* Section headings: soft dim label, regular 10.5pt, as in Adwaita for Tine. */
+body.sable-remote-theme .rooms-heading {
+  margin-inline: 6px;
+  width: calc(100% - 12px);
+  height: 32px;
+  border-radius: 9px;
+  opacity: 1;
+  color: var(--adw-dim-fg);
+}
+body.sable-remote-theme .rooms-heading:hover { background: var(--adw-row-hover); }
+body.sable-remote-theme .rooms-heading-label { font-size: 10.5pt; font-weight: 400; }
+body.sable-remote-theme .rooms-heading svg { width: 16px; height: 16px; }
+
+/* Bottom tools: flat buttons on the sidebar, no outlines. */
+body.sable-remote-theme .quick-tool { border-radius: 9px; }
+body.sable-remote-theme .quick-tool:not(.priority-warning, .priority-critical) { border-color: transparent; }
+body.sable-remote-theme .quick-tool .tool-icon svg,
+body.sable-remote-theme .quick-tool > svg { width: 16px; height: 16px; }
+
+/* ---- Content header bar --------------------------------------------------- */
+/* Flat, in the view's colour, no bottom line (Files' content header). */
+body.sable-remote-theme .panel-header {
+  min-height: 47px;
+  height: 47px;
+  border-bottom: 0;
+  box-shadow: none;
+  background: var(--adw-view-bg);
+}
+/* AdwWindowTitle: bold 11pt title, dim regular caption subtitle. */
+body.sable-remote-theme .panel-header :is(h1, h2, .room-title, .title) {
+  font-size: 11pt;
+  font-weight: 700;
+}
+body.sable-remote-theme .panel-header :is(.room-topic, .subtitle) {
+  font-size: 9pt;
+  font-weight: 400;
+  color: var(--adw-dim-fg);
+}
+/* Members drawer: a sidebar on the right, its header bar in the same colour. */
+body.sable-remote-theme .members-drawer {
+  background: var(--adw-sidebar-bg);
+  border-left: 1px solid var(--adw-sidebar-border);
+  --surface-container-hover: var(--adw-row-hover);
+  --surface-container-active: var(--adw-row-selected);
+}
+body.sable-remote-theme .members-drawer :is(.panel-header, .controls) { background: transparent; }
+body.sable-remote-theme .panel-header .room-avatar { transform: scale(0.8); }
+
+/* ---- Buttons -------------------------------------------------------------- */
+body.sable-remote-theme .btn:not(.icon-button) {
+  border-radius: 9px;
+  font-weight: 700;
+}
+body.sable-remote-theme .btn-secondary {
+  --button-container: var(--adw-button);
+  --button-container-hover: var(--adw-button-hover);
+  --button-container-active: var(--adw-button-active);
+  --button-line: transparent;
+}
+body.sable-remote-theme .btn-ghost {
+  --button-container-hover: var(--adw-flat-hover);
+  --button-container-active: var(--adw-flat-active);
+}
+/* Image buttons: 34px, 9px corners (circular where GNOME uses circles is
+   left to Sable's own round buttons), 16px symbolic icons. */
+body.sable-remote-theme .icon-button {
+  border-radius: 9px;
+  --ghost-hover: var(--adw-flat-hover);
+  --ghost-active: var(--adw-flat-active);
+}
+body.sable-remote-theme .icon-button-small { --button-icon-size: 16px; }
+body.sable-remote-theme .panel-header-button { --button-icon-size: 16px; }
+
+/* ---- Composer: an Adwaita entry ------------------------------------------ */
+body.sable-remote-theme .composer {
+  border: 0;
+  border-radius: 12px;
+  background: var(--surface-var-container);
+}
+body.sable-remote-theme .composer:focus-within {
+  box-shadow: 0 0 0 2px var(--focus-ring);
+}
+body.sable-remote-theme :is(.composer-door, .composer-board-trigger) {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+}
+body.sable-remote-theme :is(.composer-door, .composer-board-trigger):hover {
+  background: var(--adw-flat-hover);
+}
+body.sable-remote-theme :is(.composer-door, .composer-board-trigger) svg,
+body.sable-remote-theme .composer-after .icon-button svg { width: 16px; height: 16px; }
+body.sable-remote-theme .composer-separator { border-color: var(--adw-border); }
+
+/* ---- Popovers and menus --------------------------------------------------- */
+body.sable-remote-theme .menu-surface {
+  background: var(--adw-popover-bg);
+  border: 0;
+  border-radius: 15px;
+  box-shadow: 0 0 0 1px var(--adw-popover-outline), var(--adw-popover-shadow);
+  --surface-container-hover: var(--adw-flat-hover);
+  --surface-container-active: var(--adw-flat-active);
+}
+body.sable-remote-theme .menu-scroll-content { padding: 6px; }
+body.sable-remote-theme .menu-item {
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 9px;
+  font-size: 11pt;
+}
+body.sable-remote-theme .menu-item svg { width: 16px; height: 16px; }
+body.sable-remote-theme .menu-item-destructive { color: var(--crit-on-container); }
+body.sable-remote-theme .menu-separator { margin: 6px 0; background: var(--adw-border); }
+
+/* Tooltips: GTK's dark rounded label. */
+body.sable-remote-theme .tooltip {
+  background: rgba(0, 0, 6, 0.8);
+  color: #ffffff;
+  border: 0;
+  border-radius: 9px;
+  padding: 6px 10px;
+  box-shadow: none;
+  font-size: 11pt;
+}
+
+/* ---- Switches: GTK's (filled track, white 20px knob) ----------------------- */
+body.sable-remote-theme .switch-root {
+  box-shadow: none;
+  background: color-mix(in srgb, currentColor 15%, transparent);
+  opacity: 1;
+}
+body.sable-remote-theme .switch-root[data-state=checked] { background: var(--adw-accent); }
+body.sable-remote-theme .switch-thumb {
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 6, 0.2);
+}
+
+/* ---- Avatars: round, like AdwAvatar (rail tiles keep 9px, above) ----------- */
+body.sable-remote-theme .avatar-root:not(.nav-tab .avatar-root, .rail .avatar-root) {
+  border-radius: 50%;
+}
+body.sable-remote-theme .avatar-root:not(.nav-tab .avatar-root, .rail .avatar-root) :is(.avatar-image, .avatar-fallback) {
+  border-radius: 50%;
+}
+/* A popover itself never shows a focus ring in GTK; its items do. */
+body.sable-remote-theme .menu-surface:focus-visible { outline: none; }
+
+/* ---- Entries and selects: GTK entries, a 10% tint with no border ----------- */
+body.sable-remote-theme .form-control {
+  border-color: transparent;
+  --form-control-container: var(--adw-button);
+  --form-control-container-line: transparent;
+  --form-control-ring: 0px;
+  border-radius: 9px;
+}
+body.sable-remote-theme .form-control:hover:not(:focus, :focus-visible, :disabled) {
+  --form-control-container: var(--adw-button-hover);
+}
+/* Focus: GTK's 2px ring in the accent at 50%. */
+body.sable-remote-theme .form-control:is(:focus, :focus-visible, :focus-within) {
+  --form-control-line: var(--focus-ring);
+  --form-control-ring: 2px;
+}
+body.sable-remote-theme .form-control:is([aria-invalid=true], .form-control-error) {
+  --form-control-line: var(--crit-main);
+  --form-control-ring: 2px;
+}
+
+/* ---- Settings: an AdwPreferencesDialog ------------------------------------ */
+body.sable-remote-theme .dialog-content-settings {
+  border: 0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+body.sable-remote-theme .settings-nav {
+  background: var(--adw-sidebar-bg);
+  border-right: 1px solid var(--adw-sidebar-border);
+  --surface-container-hover: var(--adw-row-hover);
+  --surface-container-active: var(--adw-row-selected);
+}
+body.sable-remote-theme .settings-content,
+body.sable-remote-theme .section-bar {
+  background: var(--adw-window-bg);
+  --surface-container: var(--adw-window-bg);
+}
+body.sable-remote-theme .settings-nav-header .settings-heading { font-size: 11pt; font-weight: 700; text-align: center; }
+body.sable-remote-theme .settings-search .text-input { --form-control-container: var(--adw-button); }
+body.sable-remote-theme .settings-nav-list { padding: 6px; gap: 2px; }
+body.sable-remote-theme .settings-nav-item {
+  min-height: 36px;
+  border-radius: 9px;
+  font-size: 11pt;
+  font-weight: 400;
+}
+body.sable-remote-theme .settings-nav-item:hover { background: var(--adw-row-hover); }
+body.sable-remote-theme .settings-nav-item:is([aria-current=page], [data-current=true]) { background: var(--adw-row-selected); }
+body.sable-remote-theme .settings-nav-group-label { color: var(--adw-dim-fg); font-size: 10.5pt; font-weight: 700; }
+body.sable-remote-theme .settings-outline a { font-size: 11pt; }
+body.sable-remote-theme .settings-logout { color: var(--crit-on-container); font-size: 11pt; }
+body.sable-remote-theme .settings-section-title h2,
+body.sable-remote-theme .settings-section-heading h2 {
+  color: var(--adw-fg);
+  font-size: 11pt;
+  font-weight: 700;
+}
+body.sable-remote-theme .settings-form h3 { color: var(--adw-fg); font-size: 11pt; font-weight: 700; }
+body.sable-remote-theme :is(.settings-description, .settings-note, .themes-hint, .settings-form .hint) {
+  color: var(--adw-dim-fg);
+}
+
+/* Setting rows: a boxed list, 12px card with row separators. */
+body.sable-remote-theme .settings-section-content > .settings-rows,
+body.sable-remote-theme .settings-form > .settings-rows {
+  margin-inline: 12px;
+  background: var(--adw-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--adw-card-shadow);
+}
+body.sable-remote-theme .settings-rows > .setting-row {
+  min-height: 50px;
+  box-sizing: border-box;
+  padding: 6px 12px;
+  box-shadow: none;
+}
+body.sable-remote-theme .settings-rows > .setting-row + .setting-row {
+  border-top: 1px solid var(--adw-card-shade);
+}
+body.sable-remote-theme .settings-rows + .settings-rows { margin-top: 12px; }
+body.sable-remote-theme .settings-rows + .settings-rows .setting-row:first-child { box-shadow: none; }
+body.sable-remote-theme .settings-item-list > li {
+  background: var(--adw-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--adw-card-shadow);
+}
+
+/* Segmented choices: AdwToggleGroup. */
+body.sable-remote-theme .switcher {
+  --switcher-pad: 3px;
+  background: var(--adw-button);
+  border-radius: 9px;
+}
+body.sable-remote-theme .switcher-thumb {
+  background: var(--adw-toggle-active-bg);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 6, 0.07), 0 2px 6px 2px rgba(0, 0, 6, 0.03);
+}
+body.sable-remote-theme .switcher-option {
+  border-radius: 6px;
+  font-size: 11pt;
+  font-weight: 700;
+  color: var(--adw-fg);
+  opacity: 1;
+}
+body.sable-remote-theme .switcher-option:has(input:checked) { color: var(--adw-toggle-active-fg); }
+
+/* Badges: libadwaita-style pills without outlines. */
+body.sable-remote-theme .status-badge { border: 0; border-radius: 9999px; font-weight: 700; }
+
+/* ---- Accent as text ----------------------------------------------------------
+   libadwaita fills with the system accent but writes accent text in a clamped
+   tone (darker in light mode, lighter in dark) so it stays readable. Sable has
+   one token for both, kept as the fill; these are its text uses. */
+body.sable-remote-theme { --tc-link: var(--adw-accent-text); }
+body.sable-remote-theme :is(
+  .account-switch-button, .action-card-arrow, .action-card-icon, .app-page-eyebrow,
+  .bot-command-name, .context-kind, .drop-card, .empty-state-eyebrow, .error-code,
+  .formatted-body .code-action, .jump-item svg, .link-host, .privacy-content a,
+  .pusher-gateway-link, .reply-preview .reply-icon, .target-preview .target-icon,
+  .thread-summary, .inbox-tab[data-state=active], .summary .pin, .bot-command-name,
+  .composer-send:not(:disabled, [aria-disabled=true])
+) {
+  color: var(--adw-accent-text);
+}
+/* Plain links: Sable gives them only a build-hash class, so match "a single
+   svelte-* class" rather than the hash itself. */
+body.sable-remote-theme :is(a:not([class]), a[class^="svelte-"]:not([class*=" "])) {
+  color: var(--adw-accent-text);
+}
+
+/* ---- Cards: libadwaita .card (12px, shadow, no outline) ------------------- */
+body.sable-remote-theme :is(.settings-changes, .action-card, .profile-card-panel.framed) {
+  background: var(--adw-card-bg);
+  border: 0;
+  border-radius: 12px;
+  box-shadow: var(--adw-card-shadow);
+}
+body.sable-remote-theme .action-card:hover { background-image: linear-gradient(var(--adw-row-hover), var(--adw-row-hover)); }
