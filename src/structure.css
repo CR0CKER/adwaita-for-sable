@@ -39,6 +39,11 @@ body.sable-remote-theme {
   --header-height: 47px;
   --focus-ring-width: 2px;
   --focus-ring-offset: 0;
+  /* Icon size. GNOME's symbolic icons are 16px but filled; Sable's are thin
+     outline icons, which match Files' optical size at 20px (measured for
+     Adwaita for Tine). Menus use 18px for their shorter rows. */
+  --adw-icon-size: 20px;
+  --adw-menu-icon-size: 18px;
   /* Popover/dialog shadows as libadwaita draws them. */
   --shadow-e100: 0 1px 3px 1px var(--adw-shade);
   --shadow-e200: var(--adw-popover-shadow);
@@ -119,7 +124,7 @@ body.sable-remote-theme .room-nav-menu {
   color: inherit;
 }
 body.sable-remote-theme .room-nav-menu:hover { background: var(--adw-flat-hover); }
-body.sable-remote-theme .room-nav-menu svg { width: 16px; height: 16px; }
+body.sable-remote-theme .room-nav-menu svg { width: var(--adw-icon-size); height: var(--adw-icon-size); }
 
 /* Rows: libadwaita .navigation-sidebar > row: 36px, 9px radius, 0 8px padding,
    6px side margins, regular 11pt. */
@@ -142,9 +147,9 @@ body.sable-remote-theme :is(.nav-action, .room-row, .room-nav-trigger):is([aria-
   color: var(--adw-fg);
 }
 body.sable-remote-theme .room-row-wrap:focus-within { background: var(--adw-row-hover); }
-/* Symbolic row icons at Files' 70% opacity. */
+/* Row icons at Files' 70% opacity. */
 body.sable-remote-theme .nav-action .room-icon { opacity: 0.7; }
-body.sable-remote-theme .nav-action .room-icon svg { width: 16px; height: 16px; }
+body.sable-remote-theme .nav-action .room-icon svg { width: var(--adw-icon-size); height: var(--adw-icon-size); }
 
 /* Section headings: soft dim label, regular 10.5pt, as in Adwaita for Tine. */
 body.sable-remote-theme .rooms-heading {
@@ -157,13 +162,13 @@ body.sable-remote-theme .rooms-heading {
 }
 body.sable-remote-theme .rooms-heading:hover { background: var(--adw-row-hover); }
 body.sable-remote-theme .rooms-heading-label { font-size: 10.5pt; font-weight: 400; }
-body.sable-remote-theme .rooms-heading svg { width: 16px; height: 16px; }
+body.sable-remote-theme .rooms-heading svg { width: var(--adw-icon-size); height: var(--adw-icon-size); }
 
 /* Bottom tools: flat buttons on the sidebar, no outlines. */
 body.sable-remote-theme .quick-tool { border-radius: 9px; }
 body.sable-remote-theme .quick-tool:not(.priority-warning, .priority-critical) { border-color: transparent; }
 body.sable-remote-theme .quick-tool .tool-icon svg,
-body.sable-remote-theme .quick-tool > svg { width: 16px; height: 16px; }
+body.sable-remote-theme .quick-tool > svg { width: var(--adw-icon-size); height: var(--adw-icon-size); }
 
 /* ---- Content header bar --------------------------------------------------- */
 /* Flat, in the view's colour, no bottom line (Files' content header). */
@@ -211,14 +216,14 @@ body.sable-remote-theme .btn-ghost {
   --button-container-active: var(--adw-flat-active);
 }
 /* Image buttons: 34px, 9px corners (circular where GNOME uses circles is
-   left to Sable's own round buttons), 16px symbolic icons. */
+   left to Sable's own round buttons), icons at --adw-icon-size. */
 body.sable-remote-theme .icon-button {
   border-radius: 9px;
   --ghost-hover: var(--adw-flat-hover);
   --ghost-active: var(--adw-flat-active);
 }
-body.sable-remote-theme .icon-button-small { --button-icon-size: 16px; }
-body.sable-remote-theme .panel-header-button { --button-icon-size: 16px; }
+body.sable-remote-theme .icon-button-small { --button-icon-size: var(--adw-icon-size); }
+body.sable-remote-theme .panel-header-button { --button-icon-size: var(--adw-icon-size); }
 
 /* ---- Composer: an Adwaita entry ------------------------------------------ */
 body.sable-remote-theme .composer {
@@ -238,7 +243,7 @@ body.sable-remote-theme :is(.composer-door, .composer-board-trigger):hover {
   background: var(--adw-flat-hover);
 }
 body.sable-remote-theme :is(.composer-door, .composer-board-trigger) svg,
-body.sable-remote-theme .composer-after .icon-button svg { width: 16px; height: 16px; }
+body.sable-remote-theme .composer-after .icon-button svg { width: var(--adw-icon-size); height: var(--adw-icon-size); }
 body.sable-remote-theme .composer-separator { border-color: var(--adw-border); }
 
 /* ---- Popovers and menus --------------------------------------------------- */
@@ -257,7 +262,7 @@ body.sable-remote-theme .menu-item {
   border-radius: 9px;
   font-size: 11pt;
 }
-body.sable-remote-theme .menu-item svg { width: 16px; height: 16px; }
+body.sable-remote-theme .menu-item svg { width: var(--adw-menu-icon-size); height: var(--adw-menu-icon-size); }
 body.sable-remote-theme .menu-item-destructive { color: var(--crit-on-container); }
 body.sable-remote-theme .menu-separator { margin: 6px 0; background: var(--adw-border); }
 

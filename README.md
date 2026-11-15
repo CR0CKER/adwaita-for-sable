@@ -39,7 +39,7 @@ setting still scales it, and a font chosen in Sable's settings still wins.
 - Rail tiles and the bottom tools are flat 9px buttons without outlines.
 
 **Room view**: a flat header bar in the view's colour with no bottom line, and an AdwWindowTitle
-(bold title, dim caption topic). 16px header icons. The composer is an Adwaita entry with the 2px
+(bold title, dim caption topic). 20px header icons (the optical size of GNOME's 16px symbolic icons for outline icons). The composer is an Adwaita entry with the 2px
 accent focus ring. Avatars are round, like AdwAvatar. The members panel shares the view colour, set off by a hairline.
 
 **Controls**: 34px buttons with 9px corners and bold labels, accent-filled suggested actions;
