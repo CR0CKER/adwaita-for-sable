@@ -586,8 +586,23 @@ body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar {
 body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-track,
 body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-corner { background: transparent; }
 body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+/* Fade: hidden until the pointer is over the scrolling element, then fades in
+   (GTK also shows it on scroll; CSS can't see scrolling). --adw-sb does not
+   inherit, so a hovered ancestor doesn't light up every scrollbar inside it;
+   the thumb takes it from its own element with `inherit`. */
+@property --adw-sb {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+body.sable-remote-theme * { transition: --adw-sb 0.3s ease 0.6s; }
+body.sable-remote-theme *:hover {
+  --adw-sb: color-mix(in srgb, var(--adw-fg) 20%, transparent);
+  transition-delay: 0s;
+}
 body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--adw-fg) 20%, transparent);
+  --adw-sb: inherit;
+  background: var(--adw-sb);
   background-clip: padding-box;
   border: 5.5px solid transparent;
   border-radius: 99px;
