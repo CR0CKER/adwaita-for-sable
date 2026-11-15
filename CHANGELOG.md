@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Threads, search, media and widgets panels: the room view's colour with a hairline, like the
+  members panel.
+
 ## 0.2.0 (2026-11-15)
 
 - Window decoration: when Sable draws its own decoration, its title strip folds into the header bars.

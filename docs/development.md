@@ -59,8 +59,9 @@ running app; re-check it after Sable updates.
   tooltips and overlay scrollbars.
 - **Surfaces.** The room list is `sidebar_bg_color`, and the space rail is `secondary_sidebar_bg_color`:
   the outer pane of a nested split view, with `sidebar_border_color` shade lines between the panes and
-  at the content edge. The room view is `view_bg_color`, and the members panel shares it, set off by a
-  hairline in the border colour. Settings content is `window_bg_color`.
+  at the content edge. The room view is `view_bg_color`, and the side panels (members, threads,
+  search, media, widgets) share it, set off by a hairline in the border colour. Settings content is
+  `window_bg_color`.
 - **States.** Hover, active and selected are GTK's `alpha(currentColor, x)` tints, translucent so
   they read the same on every surface. Sidebar selection is neutral (10%), never the accent.
 - **Accent.** libadwaita fills with the system accent unchanged in both modes (`#c88800` for yellow),
@@ -69,6 +70,12 @@ running app; re-check it after Sable updates.
   out brown); Sable follows libadwaita exactly.
 - **Icon size.** GNOME's symbolic icons are 16px but filled. Sable's icons are thin outlines, which
   match Files' optical size at 20px (the measurement made for Adwaita for Tine). Menu icons are 18px.
+- **Icon glyphs stay Sable's (decided 2026-11-15).** Sable's icons are Phosphor (`phosphor-svelte`),
+  with the weight chosen in JS per icon and no name or class on the `<svg>`. A swap to Adwaita
+  symbolics is possible: match a glyph by its path data (`svg:has(> path[d^="M229.66,218.34…"])`),
+  hide its children and paint the Adwaita icon as a 16px `-webkit-mask`. A live prototype worked, but
+  only a whole-app swap looks consistent, several GNOME app icons (gear, paper plane, chat, members)
+  are not in the system Adwaita set, and those icons are CC-BY-SA/LGPL (the theme is MIT).
 - **Scrollbar fade.** A registered, non-inheriting `@property --adw-sb` holds the slider colour.
   `*:hover` sets it, and the thumb takes it from its own element with `inherit`, so hovering an
   ancestor doesn't light up every nested scrollbar. It fades in on hover and out 0.6s after the

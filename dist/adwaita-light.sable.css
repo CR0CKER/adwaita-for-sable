@@ -304,15 +304,16 @@ body.sable-remote-theme .panel-header :is(.room-topic, .subtitle) {
   font-weight: 400;
   color: var(--adw-dim-fg);
 }
-/* Members drawer: part of the room view (same view colour), set off by a
-   hairline in GTK's border colour rather than a sidebar shade. */
-body.sable-remote-theme .members-drawer {
+/* Side panels (members, threads, search, media, widgets): part of the room
+   view (same view colour), set off by a hairline in GTK's border colour
+   rather than a sidebar shade. */
+body.sable-remote-theme :is(.members-drawer, .side-panel, .widgets-panel) {
   background: var(--adw-view-bg);
   border-left: 1px solid var(--adw-border);
   --surface-container-hover: var(--adw-row-hover);
   --surface-container-active: var(--adw-row-selected);
 }
-body.sable-remote-theme .members-drawer :is(.panel-header, .controls) { background: transparent; }
+body.sable-remote-theme :is(.members-drawer, .side-panel, .widgets-panel) :is(.panel-header, .controls) { background: transparent; }
 body.sable-remote-theme .panel-header .room-avatar { transform: scale(0.8); }
 
 /* ---- Buttons -------------------------------------------------------------- */
