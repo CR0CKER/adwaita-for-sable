@@ -96,6 +96,14 @@ body.sable-remote-theme .nav-tab:is([aria-current=page], [data-current=true]):ho
   background: var(--adw-row-selected-hover);
 }
 body.sable-remote-theme .nav-tab::before { display: none !important; }
+/* GNOME buttons don't move on hover: cancel Sable's nudge (rail tiles 2px to
+   the right, bottom tools 3px up) and its counter-shift of the hit area. The
+   extra `html` and `.nav-tab` out-rank Sable's
+   `html:not([data-reduced-motion=on]) .nav-tab-bottom:hover`. */
+html body.sable-remote-theme .nav-tab:is(.nav-tab-side, .nav-tab-bottom):hover,
+html body.sable-remote-theme .nav-tab:is(.nav-tab-side, .nav-tab-bottom):hover > .nav-tab-hit-area {
+  transform: none;
+}
 body.sable-remote-theme .nav-tab .avatar-root { border-radius: 9px; }
 body.sable-remote-theme .nav-tab-bottom:is([aria-current=page], [data-current=true]) > .avatar-root::after {
   box-shadow: none;

@@ -57,7 +57,7 @@ setting still scales it, and a font chosen in Sable's settings still wins.
 - The list's name is the header bar title: bold 11pt, centred, 47px.
 - Rows as in `.navigation-sidebar`: 36px, 9px radius, 6px side margins, regular 11pt, a neutral
   selection fill instead of an accent bar; dim, regular section headings.
-- Rail tiles and the bottom tools are flat 9px buttons without outlines.
+- Rail tiles and the bottom tools are flat 9px buttons without outlines. They don't move on hover.
 
 **Room view**: a flat header bar in the view's colour with no bottom line, and an AdwWindowTitle
 (bold title, dim caption topic). The composer is an Adwaita entry with the 2px accent focus ring.

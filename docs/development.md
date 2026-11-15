@@ -70,6 +70,8 @@ running app; re-check it after Sable updates.
   and writes accent text in an oklab-clamped standalone tone (lightness ≤ 0.5 in light mode, ≥ 0.85 in
   dark). This differs from Adwaita for Tine and Logseq, which also clamp the fill (light fills came
   out brown); Sable follows libadwaita exactly.
+- **No hover motion.** Sable nudges rail tiles 2px right and bottom tools 3px up on hover (off only
+  with its reduced-motion setting). GNOME buttons don't move, so the theme sets `transform: none`.
 - **Icon size.** GNOME's symbolic icons are 16px but filled. Sable's icons are thin outlines, which
   match Files' optical size at 20px (the measurement made for Adwaita for Tine). Menu icons are 18px.
 - **Icon glyphs stay Sable's (decided 2026-11-15).** Sable's icons are Phosphor (`phosphor-svelte`),
