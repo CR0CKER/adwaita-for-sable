@@ -180,9 +180,13 @@ body.sable-remote-theme :is(.rail, .room-nav, .desktop-tools) {
   --ghost-hover: var(--adw-flat-hover);
   --ghost-active: var(--adw-flat-active);
 }
-/* No line between the rail and the list; one shade line where the sidebar
-   meets the content, as AdwOverlaySplitView draws it. */
-body.sable-remote-theme .rail { border-right: 0; }
+/* The rail is the outer pane of a nested split view: libadwaita's secondary
+   sidebar colour, and the same shade line between panes as at the content edge.
+   The room list keeps Files' sidebar colour. */
+body.sable-remote-theme .rail {
+  background: var(--adw-secondary-sidebar-bg);
+  border-right: 1px solid var(--adw-sidebar-border);
+}
 body.sable-remote-theme :is(.room-nav, .desktop-tools) {
   border-right: 1px solid var(--adw-sidebar-border);
 }
@@ -555,3 +559,16 @@ body.sable-remote-theme :is(.settings-changes, .action-card, .profile-card-panel
   box-shadow: var(--adw-card-shadow);
 }
 body.sable-remote-theme .action-card:hover { background-image: linear-gradient(var(--adw-row-hover), var(--adw-row-hover)); }
+
+/* The bottom tool bar runs under both panes: continue the rail's colour and
+   separator under the account button. */
+body.sable-remote-theme .desktop-tools {
+  background:
+    linear-gradient(to right,
+      transparent calc(var(--navigation-rail-width) - 1px),
+      var(--adw-sidebar-border) calc(var(--navigation-rail-width) - 1px) var(--navigation-rail-width),
+      transparent var(--navigation-rail-width)),
+    linear-gradient(to right,
+      var(--adw-secondary-sidebar-bg) var(--navigation-rail-width),
+      var(--adw-sidebar-bg) var(--navigation-rail-width));
+}
