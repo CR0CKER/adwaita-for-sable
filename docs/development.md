@@ -116,7 +116,10 @@ An import never replaces an installed theme: it adds another tile. So an update 
 1. Copy both `dist/*.sable.css` to `~/Downloads`.
 2. Settings → Appearance: remove the two Adwaita tiles, then import both files (scripted: `upload` on
    `input[accept=".sable.css,text/css"]`).
-3. **Restart Sable**, then select Adwaita Light and Adwaita Dark in a separate pass. Selecting right
+3. Before restarting, wait until each new theme's id appears in
+   `sable-sync-base:a1:moe.sable.next.settings`: a restart before the import has synced can drop it
+   (the account's older list wins; it happened to Adwaita Dark once).
+   **Restart Sable**, then select Adwaita Light and Adwaita Dark in a separate pass. Selecting right
    after removing and importing was saved as `null` twice, and Sable fell back to its default theme.
 4. Wait until `lightThemeId` and `darkThemeId` are set in both localStorage keys (a few seconds; the
    save is delayed and synced), then restart.
