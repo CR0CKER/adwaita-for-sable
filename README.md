@@ -134,4 +134,6 @@ the design decisions, the dev loop and the install routine are in
 
 ## License
 
-MIT
+MIT. Embedded icons: `window-close-symbolic` from GNOME's
+[Adwaita icon theme](https://gitlab.gnome.org/GNOME/adwaita-icon-theme) (LGPL-3.0 or CC-BY-SA-3.0),
+and SidebarSimple from [Phosphor Icons](https://github.com/phosphor-icons/core) (MIT, © 2023 Phosphor Icons).

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.2 (2026-11-16)
+
+- Side panels opened as drawers (narrow window) close with a sidebar icon (Phosphor's
+  SidebarSimple, from Sable's own icon set) instead of a cross, so their button no longer looks
+  like a second window close button.
+- README: credits the icons the theme embeds (Adwaita's window close, Phosphor's SidebarSimple).
+
 ## 0.4.1 (2026-11-16)
 
 - Fixed: in a narrow window (below Sable's 70.25rem / 1124px breakpoint) the room header's
