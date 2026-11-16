@@ -108,6 +108,13 @@ running app; re-check it after Sable updates.
   whose last button is "Jump to original message") shows Phosphor's SidebarSimple, mirrored,
   instead of a cross (CSS `d` on Sable's own `<path>`, so size and colour stay Sable's), so it
   isn't mistaken for a second window close button.
+  Members is the exception: Sable renders its close button only when the panel is modal (the
+  narrow drawer); inline it closes only through the room header's Members toggle. CSS can't add a
+  working button, so the theme leaves it.
+  Test header changes in both layouts, with each side panel open (Threads, Media, Widgets, Members)
+  and with a thread open (`section.thread-view`, whose header ends in "Jump to original message").
+  Open panels from the room header with a DOM `.click()` and close them the same way before the next
+  one: in the narrow layout they stack as drawers, and Escape over CDP doesn't close them.
   Test this with a real mouse: CDP input reaches the page directly and never meets Electron's drag
   areas, so a scripted click passes even when the button is dead.
 
