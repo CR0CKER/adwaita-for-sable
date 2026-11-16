@@ -129,7 +129,9 @@ An import never replaces an installed theme: it adds another tile. So an update 
    `input[accept=".sable.css,text/css"]`).
 3. Before restarting, wait until each new theme's id appears in
    `sable-sync-base:a1:moe.sable.next.settings`: a restart before the import has synced can drop it
-   (the account's older list wins; it happened to Adwaita Dark once).
+   (the account's older list wins). That alone isn't enough: on 2026-11-16 Adwaita Dark was in that
+   key and still vanished at the restart. Wait about 30 seconds after the last import, and check both
+   tiles are there after the restart before selecting.
    **Restart Sable**, then select Adwaita Light and Adwaita Dark in a separate pass. Selecting right
    after removing and importing was saved as `null` twice, and Sable fell back to its default theme.
 4. Wait until `lightThemeId` and `darkThemeId` are set in both localStorage keys (a few seconds; the
@@ -139,7 +141,9 @@ An import never replaces an installed theme: it adds another tile. So an update 
    restart can pass falsely.
 
 When scripting it, stop at the first failure (`set -e`), and check that Settings actually opened
-(`location.href` ends in `/settings/…`) before clicking anything.
+(`location.href` ends in `/settings/…`) before clicking anything. Select a theme with a DOM `.click()` on its
+`button.tile-hit` (match its text): clicking by coordinates can land outside the settings dialog,
+which closes it.
 
 ## Releasing
 
