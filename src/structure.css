@@ -207,6 +207,9 @@ body.sable-remote-theme :is(.members-drawer, .side-panel, .widgets-panel) {
 }
 body.sable-remote-theme :is(.members-drawer, .side-panel, .widgets-panel) :is(.panel-header, .controls) { background: transparent; }
 body.sable-remote-theme .panel-header .room-avatar { transform: scale(0.8); }
+/* Media panel month headings: sticky, so opaque, but in the panel's own
+   colour rather than a grey band. */
+body.sable-remote-theme .side-panel .group-heading { background: var(--adw-view-bg); }
 
 /* ---- Buttons -------------------------------------------------------------- */
 body.sable-remote-theme .btn:not(.icon-button) {
