@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.5 (2026-11-16)
+
+- The emoji picker's category column no longer takes the space rail's sidebar colour (Sable gives
+  both, and the login cards' carousel, the class `rail`); the space rail's styling is now scoped to
+  the sidebar.
+
 ## 0.4.4 (2026-11-16)
 
 - The separator between the space rail and the room list no longer doubles in width next to the

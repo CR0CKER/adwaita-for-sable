@@ -3,7 +3,7 @@
 id: adwaita-dark
 name: Adwaita Dark
 author: CR0CKER
-description: GNOME's Adwaita, laid out like GNOME Files (yellow accent). v0.4.4
+description: GNOME's Adwaita, laid out like GNOME Files (yellow accent). v0.4.5
 kind: dark
 contrast: low
 tags: dark, gnome, adwaita
@@ -170,7 +170,12 @@ body.sable-remote-theme {
 body.sable-remote-theme ::selection { background: var(--adw-selection); }
 
 /* ---- Sidebar: rail + room list read as one GNOME sidebar ------------------ */
-body.sable-remote-theme :is(.rail, .room-nav, .desktop-tools) {
+/* Sable uses .rail for three things: the space rail (always inside
+   aside.sidebar), the emoji board's category column and the login cards'
+   carousel. Only the first is the sidebar's outer pane. The scope sits in
+   :where() so it adds no specificity: :is() takes its heaviest argument's, and
+   `.sidebar .rail` in it outranked the .desktop-tools background below. */
+body.sable-remote-theme :is(:where(.sidebar) .rail, .room-nav, .desktop-tools) {
   background: var(--adw-sidebar-bg);
   color: var(--adw-fg);
   /* Inside the sidebar, Sable's view-surface states become sidebar tints. */
@@ -183,7 +188,7 @@ body.sable-remote-theme :is(.rail, .room-nav, .desktop-tools) {
 /* The rail is the outer pane of a nested split view: libadwaita's secondary
    sidebar colour, and the same shade line between panes as at the content edge.
    The room list keeps Files' sidebar colour. */
-body.sable-remote-theme .rail {
+body.sable-remote-theme :where(.sidebar) .rail {
   background: var(--adw-secondary-sidebar-bg);
   border-right: 1px solid var(--adw-sidebar-border);
 }
