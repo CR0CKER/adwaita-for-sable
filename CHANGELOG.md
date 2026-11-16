@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 (2026-11-16)
+
+- Fixed: in a narrow window (below Sable's 70.25rem / 1124px breakpoint) the room header's
+  buttons ran under the close button, and side panels opened as drawers put their own close button
+  under it too. Both header bars now leave room for it.
+
 ## 0.4.0 (2026-11-16)
 
 - Distributed from GitHub releases. The theme isn't in Sable's theme catalogue (Sable doesn't accept

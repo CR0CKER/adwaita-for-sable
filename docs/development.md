@@ -98,6 +98,11 @@ running app; re-check it after Sable updates.
   swallows real clicks. Each draggable header bar has an `::after` strip (no-drag, `--adw-wc-width`
   + 6px) at its right end, which comes after it and cuts the button out. It is absolute, not fixed:
   `.drawer-track` (`will-change: transform`) and `.room-view` (a size container) trap fixed elements.
+  Which header bar reaches the corner depends on the layout: the room header is a child of
+  `.room-view` in the wide layout and of `.timeline` below Sable's 70.25rem breakpoint, and narrow
+  side panels open as `.dialog-content-drawer` modals from the right with their own header. Each
+  gets the right padding. Check narrow widths with `Emulation.setDeviceMetricsOverride` in the
+  same CDP session as the measurement (the override ends with the session).
   Test this with a real mouse: CDP input reaches the page directly and never meets Electron's drag
   areas, so a scripted click passes even when the button is dead.
 
