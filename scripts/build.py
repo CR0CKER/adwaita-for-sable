@@ -11,7 +11,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "src"))
 import palette  # noqa: E402
 
-VERSION = "0.4.3"
+VERSION = "0.4.4"
 SCOPE = "body.sable-remote-theme"
 LIMIT = 1024 * 1024
 

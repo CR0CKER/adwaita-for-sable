@@ -93,6 +93,10 @@ running app; re-check it after Sable updates.
   default `appmenu:close` (CSS can't read the GNOME setting). To show all three buttons, drop the
   `button:not(.close) { display: none }` rule, style the other two like `.close`, and set
   `--adw-wc-width` to 91px.
+  The image viewer (`body > .viewer`, z-index 1001 under the titlebar's 7000) ends its toolbar in
+  its own close button right under the window's. While it is open the theme hides the titlebar
+  (`body:has(> .viewer)`), so the viewer's close is the only one in the corner (Nils's choice over
+  a Fractal-style back arrow or two closes side by side, 2026-11-16).
 - **Drag areas and the close button.** Electron applies `-webkit-app-region` areas in document order,
   and `.titlebar` comes before the header bars, so their `drag` overrides the button's `no-drag` and
   swallows real clicks. Each draggable header bar has an `::after` strip (no-drag, `--adw-wc-width`

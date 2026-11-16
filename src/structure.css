@@ -576,6 +576,10 @@ body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-thumb:active {
   pointer-events: auto;
 }
 :root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls button:not(.close) { display: none; }
+/* The image viewer (a direct child of body) ends its toolbar in its own close
+   button, right under the window's: while it is open, its close is the only
+   one in the corner. */
+:root[data-client-decorations=desktop] body.sable-remote-theme:has(> .viewer) .titlebar { display: none; }
 :root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls button.close {
   position: relative;
   width: 24px;

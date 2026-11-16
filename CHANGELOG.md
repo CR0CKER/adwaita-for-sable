@@ -1,9 +1,11 @@
 # Changelog
 
-## Unreleased
+## 0.4.4 (2026-11-16)
 
 - The separator between the space rail and the room list no longer doubles in width next to the
   account button at fractional display scales.
+- The image viewer's close button no longer sits under the window's close button: while the viewer
+  is open, the window close is hidden.
 
 ## 0.4.3 (2026-11-16)
 
