@@ -83,7 +83,8 @@ buttons. They fade in while the pointer is over a scrollable area and fade out a
 **Window decoration** (with Settings → Desktop app → *Use Sable's title bar* on): no title strip. The
 header bars move the window, and the only button is GNOME's round 24px close button with GTK's
 `window-close-symbolic`, 13px from the corner (GNOME's default `appmenu:close` layout, as in Adwaita
-for Tine). Electron can't round a frameless window's corners; the GNOME Shell extension
+for Tine). While the image viewer is open, its own close button takes the corner and the window
+close is hidden. Electron can't round a frameless window's corners; the GNOME Shell extension
 [Rounded Window Corners Reborn](https://extensions.gnome.org/extension/7048/rounded-window-corners-reborn/)
 can (15px matches libadwaita).
 

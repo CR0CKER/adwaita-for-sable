@@ -34,6 +34,14 @@ running app; re-check it after Sable updates.
   selects hashes, and `scripts/build.py` refuses a build that does. A plain `<a>` carries only a hash,
   so it is matched as "an `a` whose single class starts with `svelte-`":
   `a[class^="svelte-"]:not([class*=" "])`.
+  Some semantic classes are reused for unrelated parts: `.rail` is the space rail (inside
+  `aside.sidebar` in both layouts), the emoji board's category column (`.board-body > nav.rail`) and
+  the login cards' carousel. Scope such rules to their container (`.sidebar .rail`); an unscoped
+  `.rail` painted the emoji board's column in the rail's sidebar colour (fixed after 0.4.4).
+  Put such a scope in `:where()` (`:where(.sidebar) .rail`) so it adds no specificity: inside a
+  shared `:is(.sidebar .rail, .room-nav, .desktop-tools)` the extra class raised all three (`:is()`
+  takes its heaviest argument's specificity), and the shared rule then beat `.desktop-tools`' own
+  background, turning the strip under the account button grey.
 - **One accent token.** `--primary-main` serves both as fill (buttons, switches, badges: 73 uses) and
   as text (links, accent labels: about 30). The theme keeps it as the fill and lists the text uses in
   structure.css's "Accent as text" block. After a Sable update, find new text uses with
@@ -62,6 +70,12 @@ running app; re-check it after Sable updates.
   at the content edge. The room view is `view_bg_color`, and the side panels (members, threads,
   search, media, widgets) share it, set off by a hairline in the border colour. Settings content is
   `window_bg_color`.
+- **Separators are borders, never 1px gradient bands.** Chrome snaps borders to whole device pixels
+  but not gradient stops. At 166.67% (the Asahi laptop) a 1px band is 1.67 device pixels and smears
+  over two, so it looks twice as wide as a border next to it. The bottom tool bar (`.desktop-tools`,
+  under rail and room list) once continued the rail's line that way and doubled below the rail
+  (fixed in 0.4.4: a `border-right` on a `::before` as wide as the rail). A colour split at a whole
+  CSS pixel (66px = 110 device pixels) is fine as a gradient.
 - **States.** Hover, active and selected are GTK's `alpha(currentColor, x)` tints, translucent so
   they read the same on every surface. Sidebar selection is neutral (10%), never the accent.
   A hovered timeline message gets libadwaita's activatable-card lift (3%) on a 12px box inset 8px,
@@ -86,6 +100,33 @@ running app; re-check it after Sable updates.
   `transition` is a shorthand, so a weighted `*` rule replaced Sable's own transitions (0.2.0 did). It fades in on hover and out 0.6s after the
   pointer leaves. CSS can't detect scrolling itself, so unlike GTK it doesn't show on wheel scrolling
   alone.
+- **Flat room header and composer, no shadows (decided 2026-11-16).** Tried, installed and compared,
+  then reverted at Nils's request ("I prefer flat UI"); don't propose them again:
+  - libadwaita's undershoot under the room header (`toolbarview.undershoot-top`: a 1px line and a
+    4px gradient in `shade_color` at 75%, `--adw-shade` here), shown only while messages are
+    scrolled beneath it. It works in CSS: the scroller is `.timeline-stage .viewport`, which gets
+    `scroll-timeline: --adw-timeline block`; `timeline-scope` on `.timeline` hoists the name so a
+    `::before` on `.timeline-stage` (and anything else under `.timeline`) can animate opacity on it
+    with `animation-range: 0 8px`. Sable's Electron is Chrome 156. A scope declared on an inner
+    element captures the name first, so declare it once, on the common ancestor. In busy rooms
+    history loading keeps moving `scrollTop` away from 0: read scroll state after it settles.
+  - The same shade around the composer bubble (on `.composer::after`, because the bubble's own
+    `box-shadow` is its focus ring and an animation would override it), first only while newer
+    messages were below, then always.
+  For a header refresh that stays flat, GNOME's chat apps agree on: a centred title with the topic as
+  a dim subtitle, one to three end buttons, no avatar beside the title, and a timeline clamped to
+  about 750px (Fractal). Screenshots: [Fractal](https://gitlab.gnome.org/World/fractal/raw/fractal-14/screenshots/main.png),
+  [Polari](https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/metainfo/polari-main.png),
+  [Dino](https://dino.im/img/appdata/screenshot-dino-0.4-main-2244x1644@2.png),
+  [Flare](https://gitlab.com/Schmiddiii/flare/-/raw/master/data/screenshots/screenshot.png),
+  [Paper Plane](https://github.com/paper-plane-developers/paper-plane/raw/main/data/resources/screenshots/screenshot1.png),
+  [Chatty](https://gitlab.gnome.org/World/Chatty/-/raw/main/data/screenshots/desktop-unfolded-view-light.png);
+  Fractal's header is `src/session_view/room_history/mod.blp` and `title.blp`. Not pursued yet.
+- **The composer's top edge is left as Sable draws it (decided 2026-11-16).** `.composer-dock` has
+  `margin-top: -12px`, so the timeline runs 12px under the dock and messages are clipped flat at the
+  bubble's top edge; an avatar cut there squares off the bubble's rounded corner. `margin-top: 0`
+  fixes it (messages end 12px above the bubble; the newest still clears it), but Nils chose not to
+  ship it.
 - **Window decoration.** GNOME apps have no title strip: `--titlebar-height` and `--safe-top` go to 0,
   the `.titlebar` becomes a transparent overlay holding only the close button, and the header bars get
   `-webkit-app-region: drag` (their buttons, links and inputs `no-drag`). The button is a 24px circle,
@@ -121,6 +162,9 @@ running app; re-check it after Sable updates.
   one: in the narrow layout they stack as drawers, and Escape over CDP doesn't close them.
   Test this with a real mouse: CDP input reaches the page directly and never meets Electron's drag
   areas, so a scripted click passes even when the button is dead.
+  Also open an image (click `.media-image-activation` in the timeline): the window close must
+  disappear, the viewer's Close must be what sits in the corner, and the window close must return
+  once the viewer closes.
 
 ## Dev loop
 
@@ -166,6 +210,17 @@ When scripting it, stop at the first failure (`set -e`), and check that Settings
 `button.tile-hit` (match its text): clicking by coordinates can land outside the settings dialog,
 which closes it.
 
+More pitfalls (2026-11-16):
+- A Sable launch can take longer than 30 seconds to open the debug port, or not come back after a
+  restart at all: wait up to 60 seconds, and check `flatpak ps` before assuming it's running.
+  Starting Sable while it runs only hands over to the running instance (the debug flag is ignored).
+- An install run that was interrupted or rejected may have gone further than it seems. One had
+  already imported a build and restarted Sable, leaving both slots `null` (Sable on its default
+  theme). Before re-running, list `sable-custom-themes` (names, ids, a string from each build) and
+  the slot ids, and carry on from where it stopped.
+- `click()` returns nothing, so `inspect.mjs eval` around it fails to print (`"undefined" is not
+  valid JSON`) even though the click ran: end such expressions with `return 1`.
+
 ## Releasing
 
 Sable's theme catalogue (SableClient/themes) doesn't take this theme: Sable has a No-AI policy
@@ -175,9 +230,14 @@ theme is distributed from GitHub only.
 1. Bump `VERSION` in `scripts/build.py`, rebuild, run the tests, move the changelog's *Unreleased*
    entries under the new version.
 2. Commit, tag `v<version>`, push both.
-3. `gh release create v<version> dist/adwaita-light.sable.css dist/adwaita-dark.sable.css` with the
-   changelog entries as notes. The README links `releases/latest/download/<file>`, so the asset
-   names must stay the same.
+3. `gh release create v<version> dist/adwaita-light.sable.css dist/adwaita-dark.sable.css --title
+   v<version> --notes-file <notes>`. Notes: the install line used since 0.4.0 ("Install: download
+   both `.sable.css` files below, then …"), a blank line, then the changelog entries with their
+   hard wraps joined (GitHub keeps every newline). The README links
+   `releases/latest/download/<file>`, so the asset names must stay the same.
+4. Check: `gh release list` shows it as Latest, and the file from
+   `releases/latest/download/adwaita-dark.sable.css` equals `dist/`.
+5. Install the release build in Sable (above), so the installed copy is exactly the release.
 
 ## Reporting to Sable
 
