@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.3 (2026-11-16)
+
+- Side panels in the wide layout (threads, media, widgets) also close with the sidebar icon; 0.4.2
+  only changed the drawers of the narrow layout.
+
 ## 0.4.2 (2026-11-16)
 
 - Side panels opened as drawers (narrow window) close with a sidebar icon (Phosphor's

@@ -103,9 +103,11 @@ running app; re-check it after Sable updates.
   side panels open as `.dialog-content-drawer` modals from the right with their own header. Each
   gets the right padding. Check narrow widths with `Emulation.setDeviceMetricsOverride` in the
   same CDP session as the measurement (the override ends with the session).
-  The drawers' own close button (the last button of the header's `.suffix`, matched by position
-  because Sable is translated) shows Phosphor's SidebarSimple, mirrored, instead of a cross (CSS `d` on
-  Sable's own `<path>`, so size and colour stay Sable's), so it isn't mistaken for a second window close button.
+  Side panels' own close button (inline `.room-view > aside` or in a drawer; the last button of
+  the header's `.suffix`, matched by position because Sable is translated; not `section.thread-view`,
+  whose last button is "Jump to original message") shows Phosphor's SidebarSimple, mirrored,
+  instead of a cross (CSS `d` on Sable's own `<path>`, so size and colour stay Sable's), so it
+  isn't mistaken for a second window close button.
   Test this with a real mouse: CDP input reaches the page directly and never meets Electron's drag
   areas, so a scripted click passes even when the button is dead.
 

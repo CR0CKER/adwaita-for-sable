@@ -3,7 +3,7 @@
 id: adwaita-light
 name: Adwaita Light
 author: CR0CKER
-description: GNOME's Adwaita, laid out like GNOME Files (yellow accent). v0.4.2
+description: GNOME's Adwaita, laid out like GNOME Files (yellow accent). v0.4.3
 kind: light
 contrast: low
 tags: light, gnome, adwaita
@@ -708,14 +708,16 @@ body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-thumb:active {
   -webkit-mask: url("data:image/svg+xml,%3Csvg%20height%3D%2216px%22%20viewBox%3D%220%200%2016%2016%22%20width%3D%2216px%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Cpath%20d%3D%22m%204%204%20h%201%20h%200.03125%20c%200.253906%200.011719%200.511719%200.128906%200.6875%200.3125%20l%202.28125%202.28125%20l%202.3125%20-2.28125%20c%200.265625%20-0.230469%200.445312%20-0.304688%200.6875%20-0.3125%20h%201%20v%201%20c%200%200.285156%20-0.035156%200.550781%20-0.25%200.75%20l%20-2.28125%202.28125%20l%202.25%202.25%20c%200.1875%200.1875%200.28125%200.453125%200.28125%200.71875%20v%201%20h%20-1%20c%20-0.265625%200%20-0.53125%20-0.09375%20-0.71875%20-0.28125%20l%20-2.28125%20-2.28125%20l%20-2.28125%202.28125%20c%20-0.1875%200.1875%20-0.453125%200.28125%20-0.71875%200.28125%20h%20-1%20v%20-1%20c%200%20-0.265625%200.09375%20-0.53125%200.28125%20-0.71875%20l%202.28125%20-2.25%20l%20-2.28125%20-2.28125%20c%20-0.210938%20-0.195312%20-0.304688%20-0.46875%20-0.28125%20-0.75%20z%20m%200%200%22%2F%3E%20%3C%2Fsvg%3E") center / 16px 16px no-repeat;
   mask: url("data:image/svg+xml,%3Csvg%20height%3D%2216px%22%20viewBox%3D%220%200%2016%2016%22%20width%3D%2216px%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Cpath%20d%3D%22m%204%204%20h%201%20h%200.03125%20c%200.253906%200.011719%200.511719%200.128906%200.6875%200.3125%20l%202.28125%202.28125%20l%202.3125%20-2.28125%20c%200.265625%20-0.230469%200.445312%20-0.304688%200.6875%20-0.3125%20h%201%20v%201%20c%200%200.285156%20-0.035156%200.550781%20-0.25%200.75%20l%20-2.28125%202.28125%20l%202.25%202.25%20c%200.1875%200.1875%200.28125%200.453125%200.28125%200.71875%20v%201%20h%20-1%20c%20-0.265625%200%20-0.53125%20-0.09375%20-0.71875%20-0.28125%20l%20-2.28125%20-2.28125%20l%20-2.28125%202.28125%20c%20-0.1875%200.1875%20-0.453125%200.28125%20-0.71875%200.28125%20h%20-1%20v%20-1%20c%200%20-0.265625%200.09375%20-0.53125%200.28125%20-0.71875%20l%202.28125%20-2.25%20l%20-2.28125%20-2.28125%20c%20-0.210938%20-0.195312%20-0.304688%20-0.46875%20-0.28125%20-0.75%20z%20m%200%200%22%2F%3E%20%3C%2Fsvg%3E") center / 16px 16px no-repeat;
 }
-/* In the narrow layout, side panels open as drawers whose header ends in a
-   close button. Next to the window's close button a second cross reads as
-   "close the app", so its glyph becomes Phosphor's SidebarSimple (regular
-   weight, MIT, the icon set Sable uses), mirrored so the pane is on the right.
-   Swapped through the path's `d` property, so the icon keeps Sable's own size
-   and colour. Matched by position, not label: Sable is translated. */
-body.sable-remote-theme .dialog-content-drawer > * > .panel-header > .suffix > button:last-child svg { transform: scaleX(-1); }
-body.sable-remote-theme .dialog-content-drawer > * > .panel-header > .suffix > button:last-child svg path {
+/* Side panels (threads, media, widgets) end their header in a close button:
+   inline in the wide layout, in a drawer from the right in the narrow one.
+   A cross there reads as a second window close button, so its glyph becomes
+   Phosphor's SidebarSimple (regular weight, MIT, the icon set Sable uses),
+   mirrored so the pane is on the right. Swapped through the path's `d`
+   property, so the icon keeps Sable's own size and colour. Matched by
+   position, not label (Sable is translated); only `aside` panels, because an
+   open thread (`section.thread-view`) ends in "Jump to original message". */
+body.sable-remote-theme :is(.room-view, .dialog-content-drawer) > aside > .panel-header > .suffix > button:last-child svg { transform: scaleX(-1); }
+body.sable-remote-theme :is(.room-view, .dialog-content-drawer) > aside > .panel-header > .suffix > button:last-child svg path {
   d: path("M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,56H80V200H40ZM216,200H96V56H216V200Z");
 }
 /* Room for the button at the end of whichever header bar reaches the corner:
