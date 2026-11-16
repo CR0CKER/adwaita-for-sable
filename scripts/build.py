@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Build dist/adwaita-{light,dark}.sable.css from src/palette.py + src/structure.css,
-plus the theme catalogue's dist/adwaita-{light,dark}.preview.sable.css.
+"""Build dist/adwaita-{light,dark}.sable.css from src/palette.py + src/structure.css.
 
 Usage: scripts/build.py [accent]   (GNOME accent name or #rrggbb; default yellow)
 """
@@ -12,7 +11,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "src"))
 import palette  # noqa: E402
 
-VERSION = "0.3.0"
+VERSION = "0.4.0"
 SCOPE = "body.sable-remote-theme"
 LIMIT = 1024 * 1024
 
@@ -25,15 +24,8 @@ description: GNOME's Adwaita, laid out like GNOME Files ({accent} accent). v{ver
 kind: {mode}
 contrast: low
 tags: {mode}, gnome, adwaita
-fullThemeUrl: {catalog}/adwaita-{mode}.sable.css
 */
 """
-# Where the Sable theme catalogue (SableClient/themes) serves the full files.
-CATALOG = "https://git.sable.moe/SableClient/themes/raw/branch/main/themes"
-# The only properties the catalogue's preview card reads (its README).
-PREVIEW_TOKENS = ("bg-container", "bg-on-container", "surface-container",
-                  "surface-container-line", "surface-on-container",
-                  "primary-main", "primary-on-main")
 
 
 def parse_accent(arg):
@@ -49,14 +41,7 @@ def parse_accent(arg):
 
 
 def header(mode, accent):
-    return HEADER.format(mode=mode, Mode=mode.capitalize(), accent=accent, version=VERSION, catalog=CATALOG)
-
-
-def render_preview(mode, accent):
-    """Return the catalogue preview file: the metadata block and the seven preview tokens."""
-    t, _ = palette.tokens(mode, accent)
-    body = "\n".join(f"  --sable-{k}: {t[k]};" for k in PREVIEW_TOKENS)
-    return f"{header(mode, accent)}\n.sable-theme-preview {{\n{body}\n}}\n"
+    return HEADER.format(mode=mode, Mode=mode.capitalize(), accent=accent, version=VERSION)
 
 
 def render(mode, accent):
@@ -81,12 +66,11 @@ def render(mode, accent):
 
 def build(mode, accent):
     """Write dist/adwaita-<mode>.sable.css."""
-    for name, css in ((f"adwaita-{mode}.sable.css", render(mode, accent)),
-                      (f"adwaita-{mode}.preview.sable.css", render_preview(mode, accent))):
-        out = os.path.join(ROOT, "dist", name)
-        with open(out, "w") as f:
-            f.write(css)
-        print(f"{out}  {len(css.encode())} bytes")
+    css = render(mode, accent)
+    out = os.path.join(ROOT, "dist", f"adwaita-{mode}.sable.css")
+    with open(out, "w") as f:
+        f.write(css)
+    print(f"{out}  {len(css.encode())} bytes")
 
 
 if __name__ == "__main__":

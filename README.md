@@ -10,12 +10,15 @@ rules target Sable's class names, which can change between releases.
 
 ## Install
 
-1. Sable → Settings → Appearance → Themes → **Import file**: import `dist/adwaita-light.sable.css`
-   and `dist/adwaita-dark.sable.css`. (The Flatpak can read `~/Downloads`; the file chooser
-   portal reaches anything else.)
-2. Pick **Adwaita Light** in the *Light mode* row and **Adwaita Dark** in the *Dark mode* row.
-3. Set *Light or dark* to **System**, so Sable follows GNOME's style switch.
-4. Recommended: Settings → Desktop app → turn on **Use Sable's title bar**. The theme then folds
+1. Download [adwaita-light.sable.css](https://github.com/CR0CKER/adwaita-for-sable/releases/latest/download/adwaita-light.sable.css) and
+   [adwaita-dark.sable.css](https://github.com/CR0CKER/adwaita-for-sable/releases/latest/download/adwaita-dark.sable.css) from the
+   [latest release](https://github.com/CR0CKER/adwaita-for-sable/releases/latest) (the same files
+   are in `dist/`).
+2. Sable → Settings → Appearance → Themes → **Import file**: import both files. (The Flatpak can
+   read `~/Downloads`; the file chooser portal reaches anything else.)
+3. Pick **Adwaita Light** in the *Light mode* row and **Adwaita Dark** in the *Dark mode* row.
+4. Set *Light or dark* to **System**, so Sable follows GNOME's style switch.
+5. Recommended: Settings → Desktop app → turn on **Use Sable's title bar**. The theme then folds
    the title bar into GNOME-style header bars: they move the window, and the only window button is
    GNOME's round close button (see *Window decoration* below). With the setting off, the system
    draws its own title bar above Sable.
@@ -31,12 +34,10 @@ the system sans-serif and monospace fonts.
 
 ## Sharing
 
-**Theme catalogue**: submitted to Sable's catalogue (Settings → Appearance → *Theme catalogue*) in
-[SableClient/themes#78](https://git.sable.moe/SableClient/themes/pulls/78). Once it's merged, both
-themes install from there.
+The theme isn't in Sable's built-in theme catalogue: Sable doesn't accept AI-assisted contributions,
+and this theme was made with Claude Code.
 
-The two `dist/adwaita-*.sable.css` files are the whole theme (the `.preview` files are only for the
-catalogue). Send them any way you like. Sending them in a Matrix
+The two `.sable.css` files are the whole theme. Send them any way you like. Sending them in a Matrix
 chat works well: Sable shows an install card for `.sable.css` files (Settings → *Show install cards
 for theme files*), so the recipient can install them straight from the chat. They're CSS, so Sable
 asks people to install themes only from people they trust.
@@ -113,14 +114,12 @@ timeline layout.
 ## Building
 
 ```bash
-python3 scripts/build.py                    # writes dist/adwaita-{light,dark}{,.preview}.sable.css
+python3 scripts/build.py                    # writes dist/adwaita-{light,dark}.sable.css
 python3 -m unittest discover -s tests       # checks the build (no dependencies)
 ```
 
 - `src/palette.py`: Adwaita values mapped onto Sable's colour tokens.
 - `src/structure.css`: the layout rules, shared by both files.
-- `dist/*.preview.sable.css`: the metadata and seven colours Sable's theme catalogue shows on its
-  preview card (only needed for the catalogue).
 - `scripts/accent.py`: GNOME accent colours and libadwaita's oklab clamp (shared with Adwaita for Tine).
 - `tests/test_build.py`: checks the accent argument, the `--adw-*` variables, and that `dist/` is current.
 - `scripts/inspect.mjs`: drives a Sable started with

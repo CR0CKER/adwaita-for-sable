@@ -1,15 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 (2026-11-16)
 
+- Distributed from GitHub releases. The theme isn't in Sable's theme catalogue (Sable doesn't accept
+  AI-assisted contributions); the preview files and the catalogue's `fullThemeUrl` are gone.
 - Fixed: with Sable's title bar on, the close button didn't respond to clicks since 0.2.0. The header
   bars' window-drag area covered it; a no-drag strip at the end of each header bar cuts it out.
 - README: recommends turning on Settings → Desktop app → *Use Sable's title bar*.
 - Rail tiles and bottom tools no longer move on hover (Sable nudges them 2px right and 3px up);
   GNOME buttons only change their tint.
-- The build also writes `dist/adwaita-{light,dark}.preview.sable.css`, the preview files Sable's theme
-  catalogue needs, and both files' metadata carry the catalogue's `fullThemeUrl`.
-- Submitted to Sable's theme catalogue: SableClient/themes#78 (the close-button fix is on it too).
 - Media panel: the sticky month headings take the panel's colour instead of Sable's grey band.
 - Docs: where to report Sable issues (Sable-next), and Ctrl+Q not quitting Sable 2.3.9 (#1919).
 
