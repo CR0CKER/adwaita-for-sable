@@ -592,16 +592,23 @@ body.sable-remote-theme :is(.settings-changes, .action-card, .profile-card-panel
 body.sable-remote-theme .action-card:hover { background-image: linear-gradient(var(--adw-row-hover), var(--adw-row-hover)); }
 
 /* The bottom tool bar runs under both panes: continue the rail's colour and
-   separator under the account button. */
+   separator under the account button. The separator is a border, like the
+   rail's: a 1px gradient band isn't snapped to device pixels, so at fractional
+   scales (166.67%) it smeared over two and the line doubled below the rail. */
 body.sable-remote-theme .desktop-tools {
-  background:
-    linear-gradient(to right,
-      transparent calc(var(--navigation-rail-width) - 1px),
-      var(--adw-sidebar-border) calc(var(--navigation-rail-width) - 1px) var(--navigation-rail-width),
-      transparent var(--navigation-rail-width)),
-    linear-gradient(to right,
-      var(--adw-secondary-sidebar-bg) var(--navigation-rail-width),
-      var(--adw-sidebar-bg) var(--navigation-rail-width));
+  position: relative;
+  background: linear-gradient(to right,
+    var(--adw-secondary-sidebar-bg) var(--navigation-rail-width),
+    var(--adw-sidebar-bg) var(--navigation-rail-width));
+}
+body.sable-remote-theme .desktop-tools::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--navigation-rail-width);
+  box-sizing: border-box;
+  border-right: 1px solid var(--adw-sidebar-border);
+  pointer-events: none;
 }
 
 /* ---- Scrollbars: GTK overlay indicators -----------------------------------

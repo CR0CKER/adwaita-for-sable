@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- The separator between the space rail and the room list no longer doubles in width next to the
+  account button at fractional display scales.
+
 ## 0.4.3 (2026-11-16)
 
 - Side panels in the wide layout (threads, media, widgets) also close with the sidebar icon; 0.4.2
