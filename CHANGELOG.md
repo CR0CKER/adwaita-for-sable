@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.8 (2026-11-17)
 
 - A profile with its own card colour is readable in the profile editor again (#2): on a dark card
   in the light theme, the biography and profile colour panel went white under white text and the
