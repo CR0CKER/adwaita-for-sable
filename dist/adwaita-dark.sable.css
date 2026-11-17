@@ -610,6 +610,24 @@ body.sable-remote-theme :is(.settings-changes, .action-card, .profile-card-panel
   box-shadow: var(--adw-card-shadow);
 }
 body.sable-remote-theme .action-card:hover { background-image: linear-gradient(var(--adw-row-hover), var(--adw-row-hover)); }
+/* A profile with its own card colour ("tinted") brings its own ink: light on
+   a dark card, dark on a light one, whichever the app's mode (#2). Sable
+   derives the card's panels and fields from that ink; the theme's fills are
+   tints of the *app's* foreground, so on a dark card in the light theme the
+   panel went white under white text and the buttons dark under dark text.
+   Inside such a card, the fills are tints of the card's ink instead (GTK's
+   alpha(currentColor, x), with the profile's colour as currentColor), the
+   panel keeps Sable's ground for the card, and secondary buttons take the
+   ink as text. */
+body.sable-remote-theme .profile-card.tinted {
+  --adw-button: color-mix(in srgb, var(--profile-ink) 10%, transparent);
+  --adw-button-hover: color-mix(in srgb, var(--profile-ink) 15%, transparent);
+  --adw-button-active: color-mix(in srgb, var(--profile-ink) 30%, transparent);
+  --adw-flat-hover: color-mix(in srgb, var(--profile-ink) 7%, transparent);
+  --adw-flat-active: color-mix(in srgb, var(--profile-ink) 16%, transparent);
+}
+body.sable-remote-theme .profile-card.tinted .profile-card-panel.framed { background: var(--profile-panel-ground); }
+body.sable-remote-theme .profile-card.tinted .btn-secondary { --button-on-container: var(--profile-ink); }
 
 /* The bottom tool bar runs under both panes: continue the rail's colour and
    separator under the account button. The separator is a border, like the

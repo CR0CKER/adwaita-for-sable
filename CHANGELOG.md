@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- A profile with its own card colour is readable in the profile editor again (#2): on a dark card
+  in the light theme, the biography and profile colour panel went white under white text and the
+  avatar and banner buttons dark under dark text (on a light card in the dark theme, the buttons
+  had the reverse problem). Inside such a card, panels, fields and buttons now follow the card's
+  own text colour.
+
 ## 0.4.7 (2026-11-17)
 
 - An open thread's "Jump to original message" button no longer sits under the window's close button
