@@ -12,6 +12,9 @@
   manager); in the mobile layout the room list's header leaves room for it; and pages such as the
   inbox and the account page make room for it once they reach the window's corner (the inbox's
   "Bookmarks", the account page's profile card), but not in wider windows.
+- Pages in the content panel move the window like header bars do (#3): the inbox's and similar
+  pages' headers, and the account page's empty space, with their buttons and cards excluded. In
+  the mobile layout these pages had nothing to drag.
 
 ## 0.4.7 (2026-11-17)
 

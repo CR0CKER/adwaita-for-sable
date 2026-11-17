@@ -692,18 +692,27 @@ body.sable-remote-theme :is(.room-view, .dialog-content-drawer) > aside > .panel
 :root[data-client-decorations=desktop] body.sable-remote-theme .content-panel > .content > .account-manager {
   padding-top: calc(var(--page-gutter) + clamp(0px, (var(--adw-wc-width) + 6px - max(0px, (100cqw - 42rem) / 2) - var(--page-gutter)) * 1000, 47px - var(--page-gutter)));
 }
-/* Header bars move the window; their controls don't. */
-:root[data-client-decorations=desktop] body.sable-remote-theme :is(.panel-header, .room-nav-header, .settings-nav-header) {
+/* Header bars move the window; their controls don't. Pages in the content
+   panel (the inbox, search) have a header of their own, and the account page
+   none: there the page's empty space moves the window, its cards and buttons
+   don't. Without these, a page in the mobile layout, where the sidebar's
+   header is hidden, had nothing to drag (#3). */
+:root[data-client-decorations=desktop] body.sable-remote-theme :is(.panel-header, .room-nav-header, .settings-nav-header, .app-page-header) {
   position: relative;
   -webkit-app-region: drag;
 }
+:root[data-client-decorations=desktop] body.sable-remote-theme .content-panel > .content > .account-manager { -webkit-app-region: drag; }
+:root[data-client-decorations=desktop] body.sable-remote-theme .content-panel > .content > .account-manager > * { -webkit-app-region: no-drag; }
 /* Electron applies drag and no-drag areas in document order, and the
    title bar comes before the header bars: their drag area would override the
    close button's no-drag and swallow its clicks. A no-drag strip at the end
    of each header bar, after it in document order, cuts the button back out.
    (Absolute, not fixed: the room view's drawer track and size container trap
-   fixed elements.) */
-:root[data-client-decorations=desktop] body.sable-remote-theme :is(.panel-header, .room-nav-header, .settings-nav-header)::after {
+   fixed elements.) For pages, the strip sits on the content panel's corner,
+   which is the window's: the panel is their size container, so it positions
+   it, and a page header reaches the corner only in narrow windows. */
+:root[data-client-decorations=desktop] body.sable-remote-theme :is(.panel-header, .room-nav-header, .settings-nav-header)::after,
+:root[data-client-decorations=desktop] body.sable-remote-theme .content-panel > .content:has(> .app-page-shell, > .account-manager)::after {
   content: "";
   position: absolute;
   top: 0;
@@ -713,6 +722,10 @@ body.sable-remote-theme :is(.room-view, .dialog-content-drawer) > aside > .panel
   pointer-events: none;
   -webkit-app-region: no-drag;
 }
-:root[data-client-decorations=desktop] body.sable-remote-theme :is(.panel-header, .room-nav-header, .settings-nav-header) :is(button, a, input, [role=button], [tabindex]) {
+:root[data-client-decorations=desktop] body.sable-remote-theme .content-panel > .content:has(> .app-page-shell, > .account-manager)::after {
+  bottom: auto;
+  height: 47px;
+}
+:root[data-client-decorations=desktop] body.sable-remote-theme :is(.panel-header, .room-nav-header, .settings-nav-header, .app-page-header) :is(button, a, input, [role=button], [tabindex]) {
   -webkit-app-region: no-drag;
 }
