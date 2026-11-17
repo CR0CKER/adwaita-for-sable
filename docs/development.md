@@ -81,6 +81,20 @@ running app; re-check it after Sable updates.
   they read the same on every surface. Sidebar selection is neutral (10%), never the accent.
   A hovered timeline message gets libadwaita's activatable-card lift (3%) on a 12px box inset 8px,
   drawn as `::before` because the row carries the avatar gutter in its padding.
+- **Profiles with their own card colour** (`.profile-card.tinted`, with `tint-dark` or `tint-light`).
+  Sable gives such a card its own ink (`--profile-ink`: light on a dark card, dark on a light one,
+  whatever the app's mode) and derives the card's panels and fields from it. The theme's fills
+  are tints of the *app's* foreground, so inside such a card they would be wrong for the card: on
+  a dark card in the light theme the biography and colour panel went white under white text, and
+  the avatar and banner buttons dark under dark text (#2; the account page's card and the profile
+  popover too). Inside a tinted card the `--adw-button*` and `--adw-flat-*` fills are tints of
+  `--profile-ink` (GTK's `alpha(currentColor, x)` with the profile's ink as currentColor), the
+  framed panel keeps Sable's `--profile-panel-ground`, and `.btn-secondary` takes the ink as text
+  (0.4.8). Check it with a contrast scan of every text node in the card (WCAG 4.5, 3 for bold or
+  large), against both a dark card in the light theme and a light card in the dark one: type a
+  colour into the profile editor's HEX field and pick the brightness, then Cancel (nothing is
+  saved); on the account page, add the classes and `--profile-hero*` variables to the card in the
+  page. Stock Sable fails only its disabled Reset buttons there (disabled controls are exempt).
 - **Accent.** libadwaita fills with the system accent unchanged in both modes (`#c88800` for yellow),
   and writes accent text in an oklab-clamped standalone tone (lightness ≤ 0.5 in light mode, ≥ 0.85 in
   dark). This differs from Adwaita for Tine and Logseq, which also clamp the fill (light fills came
@@ -135,20 +149,60 @@ running app; re-check it after Sable updates.
   default `appmenu:close` (CSS can't read the GNOME setting). To show all three buttons, drop the
   `button:not(.close) { display: none }` rule, style the other two like `.close`, and set
   `--adw-wc-width` to 91px.
-  The image viewer (`body > .viewer`, z-index 1001 under the titlebar's 7000) ends its toolbar in
-  its own close button right under the window's. While it is open the theme hides the titlebar
-  (`body:has(> .viewer)`), so the viewer's close is the only one in the corner (Nils's choice over
-  a Fractal-style back arrow or two closes side by side, 2026-11-16).
+  **The corner rule** (Nils, 2026-11-16 and 2026-11-17): a screen that brings its own close button
+  takes the corner, and the window close is hidden while it is open; every other screen makes room
+  for the window close. Two closes side by side read as one too many (rejected for the
+  integration manager), and a Fractal-style back arrow was rejected for the viewer. libadwaita
+  agrees: a dialog covers the window's header bar. The titlebar is hidden
+  (`body:has(> .viewer, .dialog-content-fullscreen, .dialog-content-settings)`) while one of these
+  is open:
+  - the image viewer (`body > .viewer`, z-index 1001 under the titlebar's 7000), whose toolbar ends
+    in its own close (0.4.4);
+  - full-window dialogs (`.dialog-content-fullscreen`: the integration manager, and the incoming-call
+    dialog when it isn't a sheet, untested) (0.4.7);
+  - the settings dialog (`.dialog-content-settings`): inset 24px from the window down to about
+    776px, then filling it, so its corner and close lie under the window's at every narrow width
+    (0.4.8, #3).
 - **Drag areas and the close button.** Electron applies `-webkit-app-region` areas in document order,
   and `.titlebar` comes before the header bars, so their `drag` overrides the button's `no-drag` and
   swallows real clicks. Each draggable header bar has an `::after` strip (no-drag, `--adw-wc-width`
   + 6px) at its right end, which comes after it and cuts the button out. It is absolute, not fixed:
   `.drawer-track` (`will-change: transform`) and `.room-view` (a size container) trap fixed elements.
-  Which header bar reaches the corner depends on the layout: the room header is a child of
-  `.room-view` in the wide layout and of `.timeline` below Sable's 70.25rem breakpoint, and narrow
-  side panels open as `.dialog-content-drawer` modals from the right with their own header. Each
-  gets the right padding. Check narrow widths with `Emulation.setDeviceMetricsOverride` in the
-  same CDP session as the measurement (the override ends with the session).
+  Which header bar reaches the corner depends on the layout, and each one that does gets
+  `--adw-wc-width` + 6px of right padding:
+  - the room header: a child of `.room-view` in the wide layout, of `.timeline` below Sable's
+    70.25rem breakpoint;
+  - an open thread (`section.thread-view`), below that breakpoint only: there the room header has
+    moved into the timeline and the thread covers it from the top, which the selector reads as
+    `.room-view:not(:has(> .panel-header)) > .thread-view` (above it, the thread sits under the room
+    header and keeps its padding) (0.4.7);
+  - narrow side panels, which open as `.dialog-content-drawer` modals from the right;
+  - the room list in the mobile layout (`.mobile-navigation .room-nav-header`; on the desktop it is
+    the left column and keeps its padding) (0.4.8).
+  Pages in the content panel (`.content-panel > .content > .app-page-shell`: inbox, search; and
+  `.account-manager`, the account page) are centred with a maximum width, so they reach the corner
+  only in narrow windows: always in the mobile layout, and in the desktop one below about 1050px. A
+  fixed padding would push "Bookmarks" in for nothing on wide windows, so the room follows Sable's
+  own centring (0.4.8, #3): `.content` becomes a size container (`container-type: inline-size`,
+  only while it holds such a page), and with `100cqw` as its width
+  - a page header pads by `max(0px, 43px - max(page-padding, (100cqw - page-max-width) / 2 +
+    page-padding))`, Sable's page padding subtracted from what the button needs (23px at 1057px,
+    27px at 500px, 0 at 1400px);
+  - the account page, which has no header and starts with its profile card, moves its top padding
+    to 47px (below the button) while the card's right edge, `max(0, (100cqw - 42rem) / 2) +
+    page-gutter`, is within 43px of the window's; a `clamp(0px, (…) * 1000, …)` turns that comparison
+    into all or nothing (16px from about 1050px up, 47px below).
+  Pages move the window too (0.4.8, #3): page headers (`.app-page-header`) drag like header bars,
+  their controls excluded, and the account page drags in its empty space (`.account-manager`
+  drag, its children `no-drag`). Without that, a page in the mobile layout, where the sidebar's
+  header is hidden, had nothing to drag. Their no-drag strip sits on `.content`'s corner instead of
+  the header's end, limited to 47px: `.content` is the pages' size container, so it positions the
+  strip, and its corner is the window's.
+  Check narrow widths with `Emulation.setDeviceMetricsOverride` in the same CDP session as the
+  measurement (the override ends with the session); 1400, 1057, 800, 700 and 500px cover the
+  breakpoints. A probe that lists every visible control overlapping the window close's box (skip
+  `.titlebar` in `elementsFromPoint`, or the close itself hides what is under it) is quicker and
+  surer than screenshots.
   Side panels' own close button (inline `.room-view > aside` or in a drawer; the last button of
   the header's `.suffix`, matched by position because Sable is translated; not `section.thread-view`,
   whose last button is "Jump to original message") shows Phosphor's SidebarSimple, mirrored,
@@ -163,9 +217,11 @@ running app; re-check it after Sable updates.
   one: in the narrow layout they stack as drawers, and Escape over CDP doesn't close them.
   Test this with a real mouse: CDP input reaches the page directly and never meets Electron's drag
   areas, so a scripted click passes even when the button is dead.
-  Also open an image (click `.media-image-activation` in the timeline): the window close must
-  disappear, the viewer's Close must be what sits in the corner, and the window close must return
-  once the viewer closes.
+  Also open an image (click `.media-image-activation` in the timeline), settings and the
+  integration manager (Widgets → Integration manager, in a DM): the window close must disappear,
+  their own close must be what sits in the corner, and the window close must return once they
+  close. In the mobile layout (500px) also check the room list ("Back to rooms"), the inbox and the
+  account page (bottom bar), and drag each by its top edge with a real mouse.
 
 ## Dev loop
 
@@ -265,5 +321,14 @@ token: `https://git.sable.moe/api/v1/repos/SableClient/Sable-next/issues?state=a
 
 - Re-check the selectors against the new markup, above all: room header (`room-identity`,
   `room-topic`), members drawer, settings rows and outline, titlebar, scrollbar rules.
+- Re-check what the corner and drag rules copy from Sable: the dialog variants
+  (`.dialog-content-fullscreen`, `.dialog-content-settings`, `.dialog-content-drawer`),
+  `.mobile-navigation`, the page centring formula and `--page-max-width` / `--page-padding`
+  (`.app-page-shell`), the account page's `max-width: 42rem` and `--page-gutter`
+  (`.account-manager`; the 42rem is copied into the theme), and the thread view's place in
+  `.room-view`. Then run the overlap probe at 1400, 1057, 700 and 500px (see *Drag areas and the
+  close button*).
+- Re-check the tinted profile card's variables (`--profile-ink`, `--profile-panel-ground`,
+  `--button-on-container`) with the contrast scan (see *Profiles with their own card colour*).
 - Re-run the `--primary-main` text-use grep above.
 - Not styled yet: the timeline layout, call UI, emoji board and the login pages.

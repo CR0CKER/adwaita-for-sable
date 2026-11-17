@@ -83,14 +83,21 @@ buttons. They fade in while the pointer is over a scrollable area and fade out a
 **Window decoration** (with Settings → Desktop app → *Use Sable's title bar* on): no title strip. The
 header bars move the window, and the only button is GNOME's round 24px close button with GTK's
 `window-close-symbolic`, 13px from the corner (GNOME's default `appmenu:close` layout, as in Adwaita
-for Tine). While the image viewer is open, its own close button takes the corner and the window
-close is hidden. Electron can't round a frameless window's corners; the GNOME Shell extension
+for Tine). A screen with its own close button takes the corner instead: while the image viewer,
+settings or a full-window dialog (the integration manager) is open, the window close is hidden.
+Everything else makes room for it, including the mobile layout's room list and, once they reach
+the corner in a narrow window, pages such as the inbox and the account page. Pages move the window
+like header bars do, by their header or, on the account page, by its empty space. Electron can't
+round a frameless window's corners; the GNOME Shell extension
 [Rounded Window Corners Reborn](https://extensions.gnome.org/extension/7048/rounded-window-corners-reborn/)
 can (15px matches libadwaita).
 
 **Popovers and settings**: 15px menus with 32px rows and destructive items in the error text
 colour. Settings reads as an AdwPreferencesDialog: a sidebar list, bold group titles, and setting
 rows in 12px boxed-list cards with separators.
+
+Profiles with their own card colour keep it: inside such a card, panels, fields and buttons follow
+the card's own text colour, in both modes.
 
 Unchanged by design: people's own name colours (set in their Matrix profiles) and Sable's
 timeline layout.
