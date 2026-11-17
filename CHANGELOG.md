@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- The profile popover (click an avatar in the timeline) no longer shows square corners around its
+  rounded card: popover and card share libadwaita's 15px popover radius, with one outline (#1).
+
 ## 0.4.5 (2026-11-16)
 
 - The emoji picker's category column no longer takes the space rail's sidebar colour (Sable gives

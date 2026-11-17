@@ -425,6 +425,13 @@ body.sable-remote-theme .avatar-root:not(.nav-tab .avatar-root, .rail .avatar-ro
 body.sable-remote-theme .avatar-root:not(.nav-tab .avatar-root, .rail .avatar-root) :is(.avatar-image, .avatar-fallback) {
   border-radius: 50%;
 }
+/* The profile popover (click an avatar in the timeline): Sable's wrapper
+   (.responsive-popover) carries the dialog shadow with no radius, around a card
+   with its own border and radius, so the ring showed square corners behind the
+   rounded card. One 15px popover shape: the wrapper's ring is the only edge. */
+body.sable-remote-theme .mention-profile-popover,
+body.sable-remote-theme .mention-profile-popover > .profile-card { border-radius: 15px; }
+body.sable-remote-theme .mention-profile-popover > .profile-card { border: 0; }
 /* A popover itself never shows a focus ring in GTK; its items do. */
 body.sable-remote-theme .menu-surface:focus-visible { outline: none; }
 
