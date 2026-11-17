@@ -4,8 +4,9 @@
 
 - An open thread's "Jump to original message" button no longer sits under the window's close button
   in the narrow layout (below 1124px), where the thread covers the timeline up to the window's top.
-- Full-window dialogs (the integration manager) leave room for the window's close button: their
-  own close button no longer sits under it.
+- Full-window dialogs (the integration manager) no longer show two close buttons in the corner:
+  while one is open, the window's close button is hidden and the dialog's own close is the only one,
+  as with the image viewer.
 
 ## 0.4.6 (2026-11-17)
 
