@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.6 (2026-11-17)
 
 - The profile popover (click an avatar in the timeline) no longer shows square corners around its
   rounded card: popover and card share libadwaita's 15px popover radius, with one outline (#1).
