@@ -432,6 +432,14 @@ body.sable-remote-theme .avatar-root:not(.nav-tab .avatar-root, .rail .avatar-ro
 body.sable-remote-theme .mention-profile-popover,
 body.sable-remote-theme .mention-profile-popover > .profile-card { border-radius: 15px; }
 body.sable-remote-theme .mention-profile-popover > .profile-card { border: 0; }
+/* A profile card's avatar is round, but its button (and the edit button on
+   one's own card) keeps Sable's 8px corners, so the keyboard focus ring was a
+   rounded square around a circle. Round it, outside the avatar's 4px ring in
+   the card colour, which would otherwise cover it. */
+body.sable-remote-theme :is(.profile-card-avatar-wrap .avatar-button, .profile-card-avatar-edit-button) {
+  border-radius: 50%;
+  outline-offset: 4px;
+}
 /* A popover itself never shows a focus ring in GTK; its items do. */
 body.sable-remote-theme .menu-surface:focus-visible { outline: none; }
 

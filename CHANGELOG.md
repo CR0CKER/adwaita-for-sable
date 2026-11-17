@@ -4,6 +4,7 @@
 
 - The profile popover (click an avatar in the timeline) no longer shows square corners around its
   rounded card: popover and card share libadwaita's 15px popover radius, with one outline (#1).
+- A profile card's avatar shows a round keyboard focus ring instead of a rounded square.
 
 ## 0.4.5 (2026-11-16)
 
