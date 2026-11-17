@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- An open thread's "Jump to original message" button no longer sits under the window's close button
+  in the narrow layout (below 1124px), where the thread covers the timeline up to the window's top.
+- Full-window dialogs (the integration manager) leave room for the window's close button: their
+  own close button no longer sits under it.
+
 ## 0.4.6 (2026-11-17)
 
 - The profile popover (click an avatar in the timeline) no longer shows square corners around its

@@ -753,9 +753,12 @@ body.sable-remote-theme :is(.room-view, .dialog-content-drawer) > aside > .panel
 }
 /* Room for the button at the end of whichever header bar reaches the corner:
    the room header (a child of the room view when it spans the side panel, of
-   the timeline below Sable's 70.25rem breakpoint) and, in the narrow layout,
-   the side panels that open as drawers from the right. */
-:root[data-client-decorations=desktop] body.sable-remote-theme :is(.room-view > .panel-header, .room-view > .timeline > .panel-header, .dialog-content-drawer > * > .panel-header) {
+   the timeline below Sable's 70.25rem breakpoint); below that breakpoint also
+   an open thread, which then covers the timeline from the top (above it, it
+   sits under the room header); the side panels that open as drawers from the
+   right in the narrow layout; and full-window dialogs (the integration
+   manager). */
+:root[data-client-decorations=desktop] body.sable-remote-theme :is(.room-view > .panel-header, .room-view > .timeline > .panel-header, .room-view:not(:has(> .panel-header)) > .thread-view > .panel-header, :is(.dialog-content-drawer, .dialog-content-fullscreen) > * > .panel-header) {
   padding-right: calc(var(--adw-wc-width) + 6px);
 }
 /* Header bars move the window; their controls don't. */
