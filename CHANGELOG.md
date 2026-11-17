@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.7 (2026-11-17)
 
 - An open thread's "Jump to original message" button no longer sits under the window's close button
   in the narrow layout (below 1124px), where the thread covers the timeline up to the window's top.
