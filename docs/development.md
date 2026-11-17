@@ -16,9 +16,10 @@ running app; re-check it after Sable updates.
   `.remote-theme`, and a few `.sable-*` classes are renamed (`button` to `btn`, `menu` to
   `menu-surface`, `avatar` to `avatar-root`, and so on). The CSS goes into
   `<style id="sable-custom-theme">`, and `body` gets the class `remote-theme`.
-- **Storage.** Imported themes and the slot choice live in localStorage `sable-custom-themes`
-  (`themes[]`, `lightThemeId`, `darkThemeId`). The choice is also synced to the Matrix account
-  (`sable-sync-base:a1:moe.sable.next.settings`).
+- **Storage.** Imported themes and the slot choice live in localStorage `sable-custom-themes:a1`
+  (per account; `themes[]`, `lightThemeId`, `darkThemeId`). The choice is also synced to the Matrix
+  account (`sable-sync-base:a1:moe.sable.next.settings`). The older key without `:a1` is no longer
+  written (2026-11-17: it still listed tiles removed hours before): don't check it.
 - **Tokens.** Colours are tokens on `html`: `bg-*`, `surface-*`, `surface-var-*`, `primary-*`,
   `sec-*`, `success-*`, `warn-*`, `crit-*`, each as `-container/-hover/-active/-line/on-*`, plus
   `focus-ring`, `shadow-color` and `overlay`. Spacing, radii, control heights, font sizes, icon
@@ -183,7 +184,16 @@ node scripts/inspect.mjs shot /path/to/shot.png
   (real input events), `key <name>`, and `upload <selector> <file>` (feeds a file input as a file
   chooser would).
 - Wait about a second after opening a dialog or menu before taking a screenshot: they animate in.
-- Restart Sable without the debug port when done.
+- To compare with stock Sable, empty `#sable-custom-theme` *and* remove `body`'s `remote-theme`
+  class; `theme <file>` doesn't put the class back, and every rule needs it. Add it back before the
+  next measurement: forgetting this made "fixed" measurements show stock Sable (2026-11-17).
+- Navigate without clicking through the UI with a same-origin link, which SvelteKit routes on the
+  client: create `<a href="sable-app://app/inbox">`, `.click()` it, remove it. Some triggers (account
+  popover, bottom bar) ignore `.click()` and real clicks during transitions.
+- Width-dependent layouts: `Emulation.setDeviceMetricsOverride` lasts for one CDP session only, so
+  set it, act and measure in the same session (a small script on `scripts/lib/cdp.mjs`).
+- Leave Sable running with the change applied (installed or previewed) for Nils to test; restart it
+  without the debug port only once he's done.
 
 ## Installing or updating in the app
 
@@ -199,8 +209,9 @@ An import never replaces an installed theme: it adds another tile. So an update 
    tiles are there after the restart before selecting.
    **Restart Sable**, then select Adwaita Light and Adwaita Dark in a separate pass. Selecting right
    after removing and importing was saved as `null` twice, and Sable fell back to its default theme.
-4. Wait until `lightThemeId` and `darkThemeId` are set in both localStorage keys (a few seconds; the
-   save is delayed and synced), then restart.
+4. Wait until `lightThemeId` and `darkThemeId` are set in `sable-custom-themes:a1` and in the synced
+   key (a few seconds; the save is delayed and synced), then restart. Leave the other slot alone: it
+   may hold another theme (Light = macOS Light since 2026-11-17).
 5. Verify after that **fresh restart**: `#sable-custom-theme` contains a string new to this build.
    An earlier `inspect.mjs theme` preview writes into the same element, so checking without a
    restart can pass falsely.
