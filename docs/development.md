@@ -106,9 +106,8 @@ running app; re-check it after Sable updates.
   Size only a control's own icon (`.menu-item > svg`, as Sable does), never every `svg` inside it:
   a presence dot is a 10px ring holding an `<svg>`, and a descendant selector stretched that svg out
   of its ring, low and to the right (#4). Sable centres the account menu's dot in its 20px icon
-  column, so the theme re-centres it in the 18px one. Check icons with an alignment probe after a
-  change: each visible icon must stay inside its parent box, share its label's centre line, and
-  keep its menu's icon column, compared against stock Sable.
+  column, so the theme re-centres it in the 18px one. Check icons with `scripts/icon-probe.mjs`
+  after a change (see *Dev loop*).
   Header bar icons are all 20px: Sable sets Members, More options and Back (`.members-button svg`
   and so on) to `--icon-size-medium` (24px), which the theme overrides on `.panel-header-button svg`.
 - **Icon glyphs stay Sable's (decided 2026-11-15).** Sable's icons are Phosphor (`phosphor-svelte`),
@@ -240,6 +239,7 @@ python3 scripts/build.py
 python3 -m unittest discover -s tests                        # build checks, run before committing
 node scripts/inspect.mjs theme dist/adwaita-dark.sable.css   # live preview, not stored
 node scripts/inspect.mjs shot /path/to/shot.png
+node scripts/icon-probe.mjs                                  # icon alignment on the current screen
 ```
 
 - `inspect.mjs` needs Node 22 or later (built-in `fetch` and `WebSocket`).
@@ -248,6 +248,15 @@ node scripts/inspect.mjs shot /path/to/shot.png
   (real input events), `key <name>`, and `upload <selector> <file>` (feeds a file input as a file
   chooser would).
 - Wait about a second after opening a dialog or menu before taking a screenshot: they animate in.
+- `icon-probe.mjs` checks every visible icon on the current screen, with the theme and as stock
+  Sable (it toggles both back itself), and prints what the theme adds: an icon overflowing its
+  parent box (#4's presence dot), an icon off its label's centre line, a menu whose leading icons
+  leave their column, and a row of icon buttons with mixed sizes or centre lines. `--all` also
+  lists what stock Sable does itself (its 24px Members and More options, before 0.4.9); the exit
+  code is 1 when the theme adds anything. Open the screen first (a menu, a panel, settings) and
+  run it at each width that matters. The 2026-11-17 audit covered about 26 screens (main view,
+  every menu, composer pickers, emoji board, side panels, settings, room settings, inbox, explore,
+  spaces, image viewer) at 1057, 700 and 500px and in both themes; only #4 came from the theme.
 - To compare with stock Sable, empty `#sable-custom-theme` *and* remove `body`'s `remote-theme`
   class; `theme <file>` doesn't put the class back, and every rule needs it. Add it back before the
   next measurement: forgetting this made "fixed" measurements show stock Sable (2026-11-17).
@@ -303,7 +312,9 @@ Sable's theme catalogue (SableClient/themes) doesn't take this theme: Sable has 
 theme is distributed from GitHub only.
 
 1. Bump `VERSION` in `scripts/build.py`, rebuild, run the tests, move the changelog's *Unreleased*
-   entries under the new version.
+   entries under the new version. If `VERSION` was edited twice within a second (a scripted bump
+   and revert), delete `scripts/__pycache__` first: Python checks a module's cache by mtime and
+   size, kept the old version, and the tests compared against it (0.4.9).
 2. Commit, tag `v<version>`, push both.
 3. `gh release create v<version> dist/adwaita-light.sable.css dist/adwaita-dark.sable.css --title
    v<version> --notes-file <notes>`. Notes: the install line used since 0.4.0 ("Install: download
@@ -339,4 +350,6 @@ token: `https://git.sable.moe/api/v1/repos/SableClient/Sable-next/issues?state=a
 - Re-check the tinted profile card's variables (`--profile-ink`, `--profile-panel-ground`,
   `--button-on-container`) with the contrast scan (see *Profiles with their own card colour*).
 - Re-run the `--primary-main` text-use grep above.
+- Run `scripts/icon-probe.mjs` on the main view, the account menu and its status submenu, the
+  room header's and room list's menus, the composer's menus and a side panel.
 - Not styled yet: the timeline layout, call UI, emoji board and the login pages.

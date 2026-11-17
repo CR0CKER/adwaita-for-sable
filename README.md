@@ -134,9 +134,12 @@ python3 -m unittest discover -s tests       # checks the build (no dependencies)
   `flatpak run moe.sable.client --remote-debugging-port=9333`. `theme <file>` previews a build
   without importing it, `shot <png>` takes a screenshot, `eval`, `click`, `hover` and `key` help
   inspect markup, and `upload` feeds a file to Sable's import button.
+- `scripts/icon-probe.mjs`: checks the icons on Sable's current screen against stock Sable
+  (overflowing their box, off their label's centre line, out of a menu's icon column, mixed sizes
+  in a row of buttons) and lists what the theme adds.
 
-The build refuses selectors that use Sable's per-build `svelte-*` hashes. `inspect.mjs` needs
-Node 22 or later. How Sable's theming works,
+The build refuses selectors that use Sable's per-build `svelte-*` hashes. `inspect.mjs` and
+`icon-probe.mjs` need Node 22 or later. How Sable's theming works,
 the design decisions, the dev loop and the install routine are in
 [docs/development.md](docs/development.md); changes are in [CHANGELOG.md](CHANGELOG.md).
 
