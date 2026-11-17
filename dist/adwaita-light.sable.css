@@ -728,10 +728,13 @@ body.sable-remote-theme :is(*, .viewport)::-webkit-scrollbar-thumb:active {
 }
 :root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls button:not(.close) { display: none; }
 /* The image viewer (a direct child of body) ends its toolbar in its own close
-   button, right under the window's, and full-window dialogs (the integration
-   manager) end their header in one: while either is open, its close is the
-   only one in the corner. */
-:root[data-client-decorations=desktop] body.sable-remote-theme:has(> .viewer, .dialog-content-fullscreen) .titlebar { display: none; }
+   button, right under the window's; full-window dialogs (the integration
+   manager) end their header in one; and the settings dialog, inset 24px from
+   the window until it fills the window in the narrow layout, has its corner
+   and close button under the window's (#3). While one is open, its close is
+   the only one in the corner, as in libadwaita, where a dialog covers the
+   window's header bar. */
+:root[data-client-decorations=desktop] body.sable-remote-theme:has(> .viewer, .dialog-content-fullscreen, .dialog-content-settings) .titlebar { display: none; }
 :root[data-client-decorations=desktop] body.sable-remote-theme .titlebar .controls button.close {
   position: relative;
   width: 24px;
@@ -774,10 +777,33 @@ body.sable-remote-theme :is(.room-view, .dialog-content-drawer) > aside > .panel
    the room header (a child of the room view when it spans the side panel, of
    the timeline below Sable's 70.25rem breakpoint); below that breakpoint also
    an open thread, which then covers the timeline from the top (above it, it
-   sits under the room header); and the side panels that open as drawers
-   from the right in the narrow layout. */
-:root[data-client-decorations=desktop] body.sable-remote-theme :is(.room-view > .panel-header, .room-view > .timeline > .panel-header, .room-view:not(:has(> .panel-header)) > .thread-view > .panel-header, .dialog-content-drawer > * > .panel-header) {
+   sits under the room header); the side panels that open as drawers
+   from the right in the narrow layout; and, in the mobile layout, the room
+   list's header (#3). */
+:root[data-client-decorations=desktop] body.sable-remote-theme :is(.room-view > .panel-header, .room-view > .timeline > .panel-header, .room-view:not(:has(> .panel-header)) > .thread-view > .panel-header, .dialog-content-drawer > * > .panel-header, .mobile-navigation .room-nav-header) {
   padding-right: calc(var(--adw-wc-width) + 6px);
+}
+/* Pages in the content panel (the inbox, search, the account page) are
+   centred with a maximum width, so they reach the corner only when the panel
+   is narrow: in the mobile layout, and in the desktop one below about 1050px
+   (#3). The room they need follows Sable's own centring: the panel is the
+   container, and 100cqw is its width.
+   - A page's header (its actions end at the right edge, "Bookmarks" in the
+     inbox) is padded by what the page's own side padding,
+     max(page-padding, (100% - page-max-width) / 2 + page-padding), leaves
+     short of the window button's width; 0 once the page is clear of it.
+   - The account page starts with its profile card at the top: it is moved
+     below the window button, by the button's height, while the card's right
+     edge (the page's centring gap plus its gutter) is within the button's
+     width. The multiplied clamp() turns that comparison into all or none. */
+:root[data-client-decorations=desktop] body.sable-remote-theme .content-panel > .content:has(> .app-page-shell, > .account-manager) {
+  container-type: inline-size;
+}
+:root[data-client-decorations=desktop] body.sable-remote-theme .content-panel > .content > .app-page-shell > .app-page-header {
+  padding-right: max(0px, calc(var(--adw-wc-width) + 6px - max(var(--page-padding), (100cqw - var(--page-max-width)) / 2 + var(--page-padding))));
+}
+:root[data-client-decorations=desktop] body.sable-remote-theme .content-panel > .content > .account-manager {
+  padding-top: calc(var(--page-gutter) + clamp(0px, (var(--adw-wc-width) + 6px - max(0px, (100cqw - 42rem) / 2) - var(--page-gutter)) * 1000, 47px - var(--page-gutter)));
 }
 /* Header bars move the window; their controls don't. */
 :root[data-client-decorations=desktop] body.sable-remote-theme :is(.panel-header, .room-nav-header, .settings-nav-header) {

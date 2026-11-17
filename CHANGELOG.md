@@ -7,6 +7,11 @@
   avatar and banner buttons dark under dark text (on a light card in the dark theme, the buttons
   had the reverse problem). Inside such a card, panels, fields and buttons now follow the card's
   own text colour.
+- The window's close button no longer covers other controls at small window sizes (#3): while
+  settings are open, their own close is the only one in the corner (as with the integration
+  manager); in the mobile layout the room list's header leaves room for it; and pages such as the
+  inbox and the account page make room for it once they reach the window's corner (the inbox's
+  "Bookmarks", the account page's profile card), but not in wider windows.
 
 ## 0.4.7 (2026-11-17)
 
