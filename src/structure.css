@@ -240,6 +240,8 @@ body.sable-remote-theme .icon-button {
 }
 body.sable-remote-theme .icon-button-small { --button-icon-size: var(--adw-icon-size); }
 body.sable-remote-theme .panel-header-button { --button-icon-size: var(--adw-icon-size); }
+/* Sable draws Members, More options and Back at 24px beside 20px neighbours. */
+body.sable-remote-theme .panel-header-button svg { width: var(--adw-icon-size); height: var(--adw-icon-size); }
 
 /* ---- Composer: an Adwaita entry ------------------------------------------ */
 body.sable-remote-theme .composer {
@@ -278,7 +280,14 @@ body.sable-remote-theme .menu-item {
   border-radius: 9px;
   font-size: 11pt;
 }
-body.sable-remote-theme .menu-item svg { width: var(--adw-menu-icon-size); height: var(--adw-menu-icon-size); }
+/* Direct icons only, as Sable sizes them: a descendant selector also blew up
+   the presence dot's inner <svg> past its ring (#4). */
+body.sable-remote-theme .menu-item > svg { width: var(--adw-menu-icon-size); height: var(--adw-menu-icon-size); }
+/* Sable centres the account menu's presence dot in its 20px icon column;
+   centre it in the theme's 18px one. */
+body.sable-remote-theme .sidebar-popover .menu-item .presence-dot {
+  margin: 0 calc((var(--adw-menu-icon-size) - var(--space-250)) / 2);
+}
 body.sable-remote-theme .menu-item-destructive { color: var(--crit-on-container); }
 body.sable-remote-theme .menu-separator { margin: 6px 0; background: var(--adw-border); }
 

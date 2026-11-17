@@ -51,6 +51,21 @@ class GeneratedTheme(unittest.TestCase):
             if re.match(r"\s*body\.sable-remote-theme \*(:hover)?\s*\{", line):
                 self.fail(f"universal rule outside :where(): {line.strip()}")
 
+    def test_menu_icon_size_reaches_only_direct_icons(self):
+        # A descendant `.menu-item svg` also sized the presence dot's inner
+        # <svg> (10px box) to 18px, so it spilled out of its ring (#4).
+        # Sable itself sizes `.menu-item>svg`.
+        self.assertNotRegex(STRUCTURE, r"\.menu-item\s+svg")
+
+    def test_header_bar_icons_share_one_size(self):
+        # Sable draws Members, More options and Back at 24px
+        # (`.members-button svg` etc.) beside 20px neighbours.
+        self.assertRegex(
+            STRUCTURE,
+            r"body\.sable-remote-theme \.panel-header-button svg \{[^}]*"
+            r"width: var\(--adw-icon-size\); height: var\(--adw-icon-size\);",
+        )
+
     def test_committed_dist_matches_the_sources(self):
         for mode, css in self.css.items():
             name = f"adwaita-{mode}.sable.css"

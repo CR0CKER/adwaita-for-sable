@@ -103,6 +103,14 @@ running app; re-check it after Sable updates.
   with its reduced-motion setting). GNOME buttons don't move, so the theme sets `transform: none`.
 - **Icon size.** GNOME's symbolic icons are 16px but filled. Sable's icons are thin outlines, which
   match Files' optical size at 20px (the measurement made for Adwaita for Tine). Menu icons are 18px.
+  Size only a control's own icon (`.menu-item > svg`, as Sable does), never every `svg` inside it:
+  a presence dot is a 10px ring holding an `<svg>`, and a descendant selector stretched that svg out
+  of its ring, low and to the right (#4). Sable centres the account menu's dot in its 20px icon
+  column, so the theme re-centres it in the 18px one. Check icons with an alignment probe after a
+  change: each visible icon must stay inside its parent box, share its label's centre line, and
+  keep its menu's icon column, compared against stock Sable.
+  Header bar icons are all 20px: Sable sets Members, More options and Back (`.members-button svg`
+  and so on) to `--icon-size-medium` (24px), which the theme overrides on `.panel-header-button svg`.
 - **Icon glyphs stay Sable's (decided 2026-11-15).** Sable's icons are Phosphor (`phosphor-svelte`),
   with the weight chosen in JS per icon and no name or class on the `<svg>`. A swap to Adwaita
   symbolics is possible: match a glyph by its path data (`svg:has(> path[d^="M229.66,218.34…"])`),

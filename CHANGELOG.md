@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- The presence dot in the account menu and its status submenu (Online, Away, Offline) sits in its
+  ring again, centred in the icon column and on its label (#4). The menu's icon size reached the
+  dot's own drawing, which spilled out of its ring, down and to the right.
+- Header bar icons are one size: Sable draws Members, More options and the narrow layout's Back
+  arrow at 24px, beside 20px neighbours; all are 20px now.
+
 ## 0.4.8 (2026-11-17)
 
 - A profile with its own card colour is readable in the profile editor again (#2): on a dark card
