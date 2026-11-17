@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.9 (2026-11-17)
 
 - The presence dot in the account menu and its status submenu (Online, Away, Offline) sits in its
   ring again, centred in the icon column and on its label (#4). The menu's icon size reached the
