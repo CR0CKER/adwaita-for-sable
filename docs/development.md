@@ -77,6 +77,12 @@ running app; re-check it after Sable updates.
   under rail and room list) once continued the rail's line that way and doubled below the rail
   (fixed in 0.4.4: a `border-right` on a `::before` as wide as the rail). A colour split at a whole
   CSS pixel (66px = 110 device pixels) is fine as a gradient.
+- **The room-list resize handle runs through the tool bar.** Sable puts it in
+  `.desktop-navigation-main` (`height: 100%`), which ends above `.desktop-tools`
+  (`--sidebar-footer-height`, 4.625rem). Stock Sable rules the bar off with a top border; here the bar
+  continues the room list, so the handle is extended to the window's bottom (0.4.10). The bar is
+  positioned (for its `::before`), so the handle needs `z-index: 1`, or the bar covers its left half
+  (x 300–304 of 300–308).
 - **States.** Hover, active and selected are GTK's `alpha(currentColor, x)` tints, translucent so
   they read the same on every surface. Sidebar selection is neutral (10%), never the accent.
   A hovered timeline message gets libadwaita's activatable-card lift (3%) on a 12px box inset 8px,

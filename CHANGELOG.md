@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- The room list's resize handle runs down to the bottom of the window. It stopped above the bottom
+  tool bar (account, search, notifications, settings), so its accent line looked cut short and the
+  bottom part of the list's edge couldn't be dragged.
+
 ## 0.4.9 (2026-11-17)
 
 - The presence dot in the account menu and its status submenu (Online, Away, Offline) sits in its

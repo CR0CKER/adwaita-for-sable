@@ -66,6 +66,21 @@ class GeneratedTheme(unittest.TestCase):
             r"width: var\(--adw-icon-size\); height: var\(--adw-icon-size\);",
         )
 
+    def test_room_list_resize_handle_reaches_the_sidebar_bottom(self):
+        # Sable's handle fills .desktop-navigation-main, which ends above the
+        # tool bar. The theme joins that bar to the room list (no top
+        # border), so the handle looked cut short and its lower part could
+        # not be dragged. The bar is positioned (relative), so the handle
+        # needs a z-index to stay on top of it.
+        m = re.search(
+            r"body\.sable-remote-theme \.desktop-navigation-main \.resize-handle \{([^}]*)\}",
+            STRUCTURE,
+        )
+        self.assertIsNotNone(m)
+        self.assertIn("bottom: calc(-1 * var(--sidebar-footer-height));", m.group(1))
+        self.assertIn("height: auto;", m.group(1))
+        self.assertIn("z-index: 1;", m.group(1))
+
     def test_committed_dist_matches_the_sources(self):
         for mode, css in self.css.items():
             name = f"adwaita-{mode}.sable.css"

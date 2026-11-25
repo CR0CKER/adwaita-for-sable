@@ -84,6 +84,16 @@ body.sable-remote-theme :is(.room-nav, .desktop-tools) {
 }
 body.sable-remote-theme .desktop-tools { border-top: 0; }
 body.sable-remote-theme .rail-separator { background: var(--adw-border); }
+/* Sable's room-list resize handle fills .desktop-navigation-main, which ends
+   above the tool bar. Stock Sable rules that bar off; here it continues the
+   room list, so the handle looked cut short and its lower part couldn't be
+   dragged. Run it down through the bar; the bar is positioned, so lift the
+   handle above it. */
+body.sable-remote-theme .desktop-navigation-main .resize-handle {
+  height: auto;
+  bottom: calc(-1 * var(--sidebar-footer-height));
+  z-index: 1;
+}
 
 /* Rail tiles: flat 9px buttons; the selected one gets the sidebar's selection
    fill instead of Sable's accent bar on the left. */
