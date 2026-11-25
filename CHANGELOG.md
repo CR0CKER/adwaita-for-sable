@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.10 (2026-11-25)
 
 - The room list's resize handle runs down to the bottom of the window. It stopped above the bottom
   tool bar (account, search, notifications, settings), so its accent line looked cut short and the
